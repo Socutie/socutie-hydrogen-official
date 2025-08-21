@@ -60,7 +60,7 @@ export function Footer({
                   Chính sách giao hàng
                 </div>
                 <div className={"text-sm"}>
-                  Bảo hành & đổi trả
+                  Chính sách bảo hành & đổi trả
                 </div>
               </div>
                 </FadeInItem>
