@@ -53,7 +53,7 @@ export function AddToCartButton({
                 transition-all duration-300 ease-in-out
                 hover:text-light-main
                 before:absolute before:inset-0
-                before:bg-light-bg1 before:translate-x-[-100%]
+                before:bg-light-bg1 before:translate-x-[-110%]
                 before:transition-transform before:duration-500 before:ease-in-out
                 hover:before:translate-x-0
               `}

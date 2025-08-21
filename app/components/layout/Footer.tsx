@@ -81,7 +81,7 @@ export function Footer({
                 <div className={"flex gap-3"}>
                   <Mail size={20}/>
                   <div className={"text-sm"}>
-                    contact@socutie.sg
+                    socutiesg2023@gmail.com
                   </div>
                 </div>
 
