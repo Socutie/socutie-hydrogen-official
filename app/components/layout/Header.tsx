@@ -12,12 +12,14 @@ import type {
 } from '../../../storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import {Globe, Menu, Search, ShoppingCart, UserRound} from 'lucide-react';
+import {I18nLocale} from '~/lib/i18n';
 
 interface HeaderProps {
   header: HeaderQuery;
   cart: Promise<CartApiQueryFragment | null>;
   isLoggedIn: Promise<boolean>;
   publicStoreDomain: string;
+  i18n: I18nLocale
 }
 
 type Viewport = 'desktop' | 'mobile';
@@ -27,6 +29,7 @@ export function Header({
   isLoggedIn,
   cart,
   publicStoreDomain,
+  i18n
 }: HeaderProps) {
   /* shopify nav */
   const {shop, menu} = header;
@@ -38,6 +41,7 @@ export function Header({
 
   const lastScrollY = useRef(0);
 
+  // Detect isAtTop
   useEffect(() => {
     const handleScroll = () => {
       setIsAtTop(window.scrollY === 0);
@@ -49,11 +53,14 @@ export function Header({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Detect scrollDir
   useEffect(() => {
     const handleScroll = () => {
-      const currentY = window.scrollY;
+      const currentY = Math.max(0, window.scrollY); // prevent negative values
 
-      if (currentY > lastScrollY.current) {
+      if (currentY <= 0) {
+        setScrollDir('up'); // force show header when at very top
+      } else if (currentY > lastScrollY.current) {
         setScrollDir('down');
       } else if (currentY < lastScrollY.current) {
         setScrollDir('up');
@@ -62,10 +69,10 @@ export function Header({
       lastScrollY.current = currentY;
     };
 
-    window.addEventListener('scroll', handleScroll);
-
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
 
   const validTitlesOnMobile = menu?.items
     .filter((item) => item.title.length <= 10)
@@ -86,9 +93,9 @@ export function Header({
         `}
       >
         <div className={'flex items-center justify-between w-full max-w-screen-xl'}>
-          <div className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}>
+          <div  className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}>
             <HeaderMenuMobileToggle />
-            <Globe strokeWidth={1.75} className={'transition-colors duration-200 hover:cursor-pointer hover:text-light-main'}/>
+            <ChangeLocaleCta i18n={i18n}/>
           </div>
           <div className={'w-[20%] flex justify-center items-center'}>
             <Logo />
@@ -135,6 +142,28 @@ export function Header({
       </div>
     </div>
   );
+}
+
+export function ChangeLocaleCta({i18n}: {i18n: I18nLocale}) {
+  const currentLocale = i18n.pathPrefix;
+  const isVn = currentLocale.toLowerCase() === "/vi-vn" || currentLocale === "";
+  const targetLocale = isVn ? "/en-us" : "/";
+
+  return (
+    <a href={targetLocale} className="relative inline-block group">
+      {/* Globe icon */}
+      <Globe
+        strokeWidth={1.75}
+        className="transition-colors duration-200 group-hover:text-light-main"
+      />
+
+      {/* Locale label */}
+      <div className="absolute -top-[4px] -right-[4px] w-5 h-3 flex items-center justify-center text-[10px] font-bold bg-light-bg1 text-light-text1 rounded transition-colors duration-200 group-hover:text-light-main">
+        {isVn ? "EN" : "VN"}
+      </div>
+    </a>
+  );
+
 }
 
 export function Logo({width = 62, height = 62}) {
@@ -450,10 +479,27 @@ function getRealUrlFromMenuUrl(
   publicStoreDomain: string,
   primaryDomainUrl: string,
 ): string {
+  let pathname = new URL(menuUrl).pathname;
+
+  const locales: string[] = ['en', 'en-us', 'vi', 'vi-vn'];
+
+  // remove leading locale prefix if present
+  for (const locale of locales) {
+    const prefix = `/${locale.toLowerCase()}`;
+    if (pathname.toLowerCase().startsWith(prefix + '/')) {
+      pathname = pathname.slice(prefix.length); // cut only the prefix
+      break;
+    }
+    if (pathname.toLowerCase() === prefix) {
+      pathname = '/'; // if it's exactly /en-us → /
+      break;
+    }
+  }
+
   return menuUrl.includes('myshopify.com') ||
-    menuUrl.includes(publicStoreDomain) ||
-    menuUrl.includes(primaryDomainUrl)
-    ? new URL(menuUrl).pathname
+  menuUrl.includes(publicStoreDomain) ||
+  menuUrl.includes(primaryDomainUrl)
+    ? pathname || '/'
     : menuUrl;
 }
 

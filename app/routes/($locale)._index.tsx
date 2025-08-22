@@ -25,8 +25,10 @@ export async function loader(args: LoaderFunctionArgs) {
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
+  const i18n = args.context.storefront.i18n;
+
   // return {...deferredData, ...criticalData};
-  return {...criticalData};
+  return {...criticalData, i18n};
 }
 
 /**
@@ -124,7 +126,7 @@ export default function Homepage() {
               <Instagram className={"text-light-text2"}/>
             </a>
             <a
-              href={"https://www.instagram.com/socutie.sg"}
+              href={"https://www.tiktok.com/@socutie.sg"}
               target="_blank"
               rel="noopener noreferrer"
             >

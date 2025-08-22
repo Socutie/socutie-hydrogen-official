@@ -109,7 +109,7 @@ export function Footer({
                     <Instagram className={"text-light-text2"}/>
                   </a>
                   <a
-                    href={"https://www.instagram.com/socutie.sg"}
+                    href={"https://www.tiktok.com/@socutie.sg"}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

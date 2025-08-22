@@ -3,6 +3,24 @@ export function formatVnd(vnd: string): string {
   return vndNum.toLocaleString("vi-VN"); // formats with dots as thousand separators
 }
 
+export function formatUsd(usd: string): string {
+  const usdNum = parseFloat(usd);
+  return usdNum.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+export function getFullPriceString(amount: string, currency: string): string {
+  if(currency === "VND") {
+    return formatVnd(amount) + "₫";
+  }
+  if(currency === "USD") {
+    return "$" + formatUsd(amount);
+  }
+  return amount + " " + currency;
+}
+
 export function discountPercentage(price: string, compareAt: string): string {
   const priceNum = Number(price);
   const compareAtNum = Number(compareAt);

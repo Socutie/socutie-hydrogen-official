@@ -81,6 +81,8 @@ export async function loader(args: LoaderFunctionArgs) {
 
   const {storefront, env} = args.context;
 
+  const i18n = storefront.i18n;
+
   return {
     ...deferredData,
     ...criticalData,
@@ -97,6 +99,7 @@ export async function loader(args: LoaderFunctionArgs) {
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
     },
+    i18n
   };
 }
 
@@ -152,8 +155,11 @@ export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
   const data = useRouteLoaderData<RootLoader>('root');
 
+  const i18n = data?.i18n;
+  const language = i18n?.language;
+
   return (
-    <html lang="en">
+    <html lang={language?.toLowerCase() ?? "en"}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />

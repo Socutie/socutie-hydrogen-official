@@ -155,8 +155,11 @@ export default function Product() {
           {/* Right side (bottom on mobile) */}
           <div className="product-form px-6 lg:px-0 lg:ml-12 lg:sticky lg:top-8 self-start">
             {/* Title and price */}
-            <div className={"w-fit font-[400] text-sm text-light-text2 mb-2 transition-all duration-300 hover:cursor-pointer hover:text-light-text1"}>SoCutie</div>
+            <div className={"w-fit font-[400] text-sm text-light-text2 mb-2 transition-all duration-300 hover:cursor-pointer hover:text-light-text1"}>
+              SoCutie
+            </div>
             <div className={"font-[700] font-cute text-3xl mb-2 "}>{title}</div>
+            <div className={"font-[400] text-base tracking-tight mb-2 "}>Item không thể thiếu trong tủ đồ của các nàng</div>
             <ProductPrice
               price={selectedVariant?.price}
               compareAtPrice={selectedVariant?.compareAtPrice}

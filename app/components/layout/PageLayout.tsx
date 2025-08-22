@@ -14,6 +14,7 @@ import {
   SearchFormPredictive,
 } from '~/components/SearchFormPredictive';
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
+import {I18nLocale} from '~/lib/i18n';
 
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -22,6 +23,7 @@ interface PageLayoutProps {
   isLoggedIn: Promise<boolean>;
   publicStoreDomain: string;
   children?: React.ReactNode;
+  i18n: I18nLocale;
 }
 
 export function PageLayout({
@@ -31,6 +33,7 @@ export function PageLayout({
   header,
   isLoggedIn,
   publicStoreDomain,
+  i18n
 }: PageLayoutProps) {
   return (
     <Aside.Provider>
@@ -43,6 +46,7 @@ export function PageLayout({
           cart={cart}
           isLoggedIn={isLoggedIn}
           publicStoreDomain={publicStoreDomain}
+          i18n={i18n}
         />
       )}
       <main className={"mb-32"}>{children}</main>

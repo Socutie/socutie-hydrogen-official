@@ -7,7 +7,7 @@ import {ProductPrice} from '../ProductPrice';
 import {useAside} from '../Aside';
 import type {CartApiQueryFragment} from '../../../storefrontapi.generated';
 import {Minus, Plus, X} from 'lucide-react';
-import {formatVnd} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
 
 type CartLine = OptimisticCartLine<CartApiQueryFragment>;
 
@@ -65,7 +65,7 @@ export function CartLineItem({
             </ul>
           </div>
           <div className={"flex flex-col gap-1"}>
-            <div className={`sm:hidden text-sm font-normal text-light-text1`}>{formatVnd(line?.cost?.totalAmount.amount)}{line?.cost?.totalAmount.currencyCode === "VND" ? "₫" : "$"}</div>
+            <div className={`sm:hidden text-sm font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode)}</div>
             <CartLineQuantity line={line} />
           </div>
         </div>
@@ -73,7 +73,7 @@ export function CartLineItem({
         {/* Right side */}
         <div className={"hidden sm:flex flex-col justify-end items-end"}>
           {/*<ProductPrice price={line?.cost?.totalAmount} compareAtPrice={line?.cost?.compareAtAmountPerQuantity}/>*/}
-          <div className={`text-base font-normal text-light-text1`}>{formatVnd(line?.cost?.totalAmount.amount)}{line?.cost?.totalAmount.currencyCode === "VND" ? "₫" : "$"}</div>
+          <div className={`text-base font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode)}</div>
         </div>
       </div>
     </li>

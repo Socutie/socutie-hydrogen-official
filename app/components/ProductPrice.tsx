@@ -1,6 +1,6 @@
 import {Money} from '@shopify/hydrogen';
 import type {MoneyV2} from '@shopify/hydrogen/storefront-api-types';
-import {formatVnd} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
 
 export function ProductPrice({
   price,
@@ -16,7 +16,7 @@ export function ProductPrice({
       {compareAtPrice && Number(compareAtPrice.amount) > Number(price.amount) ? (
         <SalePriceDisplay/>
       ) : price ? (
-        <div className={`${size === "normal" ? "text-xl" : "text-sm lg:text-base"} font-[500] text-light-text2`}>{formatVnd(price.amount)}{price.currencyCode === "VND" ? "₫" : "$"}</div>
+        <div className={`${size === "normal" ? "text-xl text-light-main" : "text-sm lg:text-base text-light-text2"} font-[500] `}>{getFullPriceString(price.amount, price.currencyCode)}</div>
       ) : (
         <span>&nbsp;</span>
       )}

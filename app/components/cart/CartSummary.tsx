@@ -3,7 +3,7 @@ import type {CartLayout} from '~/components/cart/CartMain';
 import {CartForm, Money, type OptimisticCart} from '@shopify/hydrogen';
 import {useRef} from 'react';
 import {FetcherWithComponents, Link} from 'react-router';
-import {formatVnd} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
 import {ArrowRight} from 'lucide-react';
 
 type CartSummaryProps = {
@@ -24,7 +24,7 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
         <div className={"font-title text-xl font-medium"}>Tổng cộng</div>
         <div className={"text-lg font-medium"}>
           {cart.cost?.subtotalAmount?.amount ? (
-            <div>{formatVnd(cart.cost?.subtotalAmount.amount)}{cart.cost?.subtotalAmount.currencyCode === "VND" ? "₫" : "$"}</div>
+            <div>{getFullPriceString(cart.cost?.subtotalAmount.amount, cart.cost?.subtotalAmount.currencyCode ?? "")}</div>
           ) : (
             '-'
           )}

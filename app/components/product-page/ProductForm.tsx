@@ -27,15 +27,15 @@ export function ProductForm({
       {/* Variant selection */}
       {productOptions.map((option) => {
         // If there is only a single value in the option values, don't display the option
-        //if (option.optionValues.length === 1) return null;
+        if (option.optionValues.length === 1 && option.optionValues.at(0)?.name === "Default Title") return null;
 
         const currentValueName = option.optionValues.find(value => value.selected)?.name;
 
         return (
           <div className="" key={option.name}>
-            <div className={'mb-2  flex gap-1'}>
-              <div className={"text-sm"}>{option.name}:</div>
-              <div className={"text-sm font-[500]"}>{currentValueName}</div>
+            <div className={'mb-2 flex gap-1'}>
+              <div className={"text-sm shrink-0"}>{option.name}:</div>
+              <div className={"text-sm font-[500] truncate"}>{currentValueName}</div>
             </div>
             <div className="flex flex-wrap gap-2">
               {option.optionValues.map((value) => {
