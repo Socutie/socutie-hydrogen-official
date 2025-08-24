@@ -178,7 +178,7 @@ export function ChangeLocaleCta({pathname}: {pathname: string}) {
 
 export function Logo({width = 62, height = 62, pathname}: {width?: number, height?: number, pathname: string}) {
   return (
-    <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}`}>
+    <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}/`}>
       {/*<div className={`font-fancy font-medium text-[40px] ${className}`}>SoCutie</div>*/}
 
       <Image
