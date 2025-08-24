@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import {Link, useLocation} from 'react-router';
 import {Image, Money} from '@shopify/hydrogen';
 import {
   ProductItemFragment,
@@ -6,11 +6,12 @@ import {
   ProductSummaryFragment,
 } from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
-import {discountPercentage, formatVnd} from '~/utils/stringUtils';
+import {discountPercentage, formatVnd} from '~/common/utils/stringUtils';
 import {useState} from "react";
 import {Handbag, Plus, Search} from 'lucide-react';
 import convert from 'color-convert';
 import {ProductPrice} from '~/components/ProductPrice';
+import {cutLocalePartFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
 
 export function ProductItem({
   product,
@@ -19,7 +20,11 @@ export function ProductItem({
   product: ProductSummaryFragment;
   loading?: 'eager' | 'lazy';
 }) {
+  const location = useLocation();
+
   const variantUrl = useVariantUrl(product.handle);
+
+  const targetUrl = getAvailableLocaleUrlPartFromPathname(location.pathname) + cutLocalePartFromPathname(variantUrl);
 
   const imgUrlsList = product.images.nodes.map(image => image.url);
   const emptyImgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
@@ -44,7 +49,7 @@ export function ProductItem({
         className="group"
         key={product.id}
         prefetch="intent"
-        to={variantUrl}
+        to={targetUrl}
       >
         <div className="relative">
           {/* Initial image */}

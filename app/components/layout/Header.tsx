@@ -13,6 +13,12 @@ import type {
 import {useAside} from '~/components/Aside';
 import {Globe, Menu, Search, ShoppingCart, UserRound} from 'lucide-react';
 import {I18nLocale} from '~/lib/i18n';
+import {
+  cutLocalePartFromPathname,
+  getAvailableLocaleFromPathname,
+  getAvailableLocaleUrlPartFromPathname
+} from "~/common/utils/i18nUtils";
+import Tie from "/public/svg/tie.svg";
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -95,10 +101,15 @@ export function Header({
         <div className={'flex items-center justify-between w-full max-w-screen-xl'}>
           <div  className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}>
             <HeaderMenuMobileToggle />
-            <ChangeLocaleCta i18n={i18n}/>
+            <div className={"hidden md:flex items-center"}>
+              <ChangeLocaleCta pathname={location.pathname}/>
+            </div>
+            <div className={"flex md:hidden items-center"}>
+              <SearchToggle />
+            </div>
           </div>
           <div className={'w-[20%] flex justify-center items-center'}>
-            <Logo />
+            <Logo pathname={location.pathname}/>
           </div>
           <div className={'w-[40%] flex justify-end items-center'}>
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
@@ -126,11 +137,12 @@ export function Header({
             if(countSubHeaderItems > maxSubHeaderItems) return null;
 
             const url = getRealUrlFromMenuUrl(item.url, publicStoreDomain, header.shop.primaryDomain.url);
+            const localeUrlPart = getAvailableLocaleUrlPartFromPathname(location.pathname);
 
             return (
               <NavLink
                 key={item.id}
-                to={url}
+                to={localeUrlPart + url}
                 prefetch="intent"
                 className={`${validTitlesOnMobile?.includes(item.title) ? "block" : "hidden md:block"} text-sm font-[600] hover:text-light-main transition-all duration-300`}
               >
@@ -144,13 +156,11 @@ export function Header({
   );
 }
 
-export function ChangeLocaleCta({i18n}: {i18n: I18nLocale}) {
-  const currentLocale = i18n.pathPrefix;
-  const isVn = currentLocale.toLowerCase() === "/vi-vn" || currentLocale === "";
-  const targetLocale = isVn ? "/en-us" : "/";
-
+export function ChangeLocaleCta({pathname}: {pathname: string}) {
+  const targetLocale = getAvailableLocaleFromPathname(pathname) === "vi-vn" ? "/en-us" : "";
+  const cutLocalePathname = cutLocalePartFromPathname(pathname);
   return (
-    <a href={targetLocale} className="relative inline-block group">
+    <a href={`${targetLocale}${cutLocalePathname}`} className="relative inline-block group">
       {/* Globe icon */}
       <Globe
         strokeWidth={1.75}
@@ -159,16 +169,16 @@ export function ChangeLocaleCta({i18n}: {i18n: I18nLocale}) {
 
       {/* Locale label */}
       <div className="absolute -top-[4px] -right-[4px] w-5 h-3 flex items-center justify-center text-[10px] font-bold bg-light-bg1 text-light-text1 rounded transition-colors duration-200 group-hover:text-light-main">
-        {isVn ? "EN" : "VN"}
+        {targetLocale === "" ? "VN" : "EN"}
       </div>
     </a>
   );
 
 }
 
-export function Logo({width = 62, height = 62}) {
+export function Logo({width = 62, height = 62, pathname}: {width?: number, height?: number, pathname: string}) {
   return (
-    <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+    <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}`}>
       {/*<div className={`font-fancy font-medium text-[40px] ${className}`}>SoCutie</div>*/}
 
       <Image
@@ -176,9 +186,9 @@ export function Logo({width = 62, height = 62}) {
         alt="hero-banner"
         width={width}
         height={height}
-        className="object-contain "
+        className="object-contain"
       />
-    </NavLink>
+    </a>
   );
 }
 
@@ -331,23 +341,26 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="flex gap-4 md:gap-6" role="navigation">
-      <a
-        className={"hidden md:flex"}
-        href={"https://www.instagram.com/socutie.sg"}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          src="/images/tie-icon.png"
-          alt="hero-banner"
-          width={26}
-          height={26}
-          className="object-contain"
-        />
-      </a>
+      {/*<a*/}
+      {/*  className={"hidden md:flex"}*/}
+      {/*  href={"https://www.instagram.com/socutie.sg"}*/}
+      {/*  target="_blank"*/}
+      {/*  rel="noopener noreferrer"*/}
+      {/*>*/}
+      {/*  <Image*/}
+      {/*    src="/images/tie-icon.png"*/}
+      {/*    alt="hero-banner"*/}
+      {/*    width={26}*/}
+      {/*    height={26}*/}
+      {/*    className="object-contain"*/}
+      {/*  />*/}
+      {/*</a>*/}
 
 
-      <SearchToggle />
+      <div className={"hidden md:flex items-center"}>
+        <SearchToggle />
+      </div>
+
 
       {/*<a*/}
       {/*  className={"hidden md:flex"}*/}
@@ -371,25 +384,21 @@ function HeaderCtas({
       {/*  </Suspense>*/}
       {/*</NavLink>*/}
 
-      {/*<NavLink className={"hidden md:flex"} prefetch="intent" to="https://shopify.com/75618549982/account" style={activeLinkStyle}>*/}
-      {/*  <Suspense fallback="Sign in">*/}
-      {/*    <Await resolve={isLoggedIn} errorElement="Sign in">*/}
-      {/*      <UserRound className={"transition-colors duration-200 hover:text-light-main"}/>*/}
-      {/*    </Await>*/}
-      {/*  </Suspense>*/}
-      {/*</NavLink>*/}
-
       {/* Shopify customer account login */}
       <a
-        href={'https://shopify.com/75618549982/account'}
+        href={'https://shopify.com/67120103510/account'}
         target="_blank"
         rel="noopener noreferrer"
-        className={'hidden md:flex'}
+        className={'flex'}
       >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
-            <UserRound
-              className={'transition-colors duration-200 hover:text-light-main'}
+            <Image
+              src="/svg/tie.svg"
+              alt="hero-banner"
+              width={26}
+              height={26}
+              className="object-contain"
             />
           </Await>
         </Suspense>
@@ -479,27 +488,13 @@ function getRealUrlFromMenuUrl(
   publicStoreDomain: string,
   primaryDomainUrl: string,
 ): string {
-  let pathname = new URL(menuUrl).pathname;
 
-  const locales: string[] = ['en', 'en-us', 'vi', 'vi-vn'];
-
-  // remove leading locale prefix if present
-  for (const locale of locales) {
-    const prefix = `/${locale.toLowerCase()}`;
-    if (pathname.toLowerCase().startsWith(prefix + '/')) {
-      pathname = pathname.slice(prefix.length); // cut only the prefix
-      break;
-    }
-    if (pathname.toLowerCase() === prefix) {
-      pathname = '/'; // if it's exactly /en-us → /
-      break;
-    }
-  }
+  const cutLocalePathname = cutLocalePartFromPathname(new URL(menuUrl).pathname);
 
   return menuUrl.includes('myshopify.com') ||
   menuUrl.includes(publicStoreDomain) ||
   menuUrl.includes(primaryDomainUrl)
-    ? pathname || '/'
+    ? cutLocalePathname || '/'
     : menuUrl;
 }
 

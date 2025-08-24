@@ -7,7 +7,7 @@ import {
   type PredictiveSearchReturn,
 } from '~/lib/search';
 import {useAside} from './Aside';
-import {formatVnd} from '~/utils/stringUtils';
+import {formatVnd} from '~/common/utils/stringUtils';
 
 type PredictiveSearchItems = PredictiveSearchReturn['result']['items'];
 

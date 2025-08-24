@@ -1,5 +1,5 @@
 import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link, type MetaFunction} from 'react-router';
+import {Await, useLoaderData, Link, type MetaFunction, useLocation} from 'react-router';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {
@@ -13,6 +13,8 @@ import {HeroBanner} from '~/components/home/HeroBanner';
 import {FadeInItem, FadeInStagger} from "~/components/framer-motion/FadeInStagger";
 import {FadeInDiv} from "~/components/framer-motion/FadeInDiv";
 import {Instagram} from "lucide-react";
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {APP_STRINGS} from '~/common/constants/appStrings';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -80,6 +82,7 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
 }
 
 export default function Homepage() {
+  const location = useLocation();
   const data = useLoaderData<typeof loader>();
 
   const bestSellersCollection = data
@@ -104,16 +107,16 @@ export default function Homepage() {
 
       <div className={"h-16"}></div>
 
-      {/* Decoration Div */}
+      {/* Introduction Div */}
       <div className={"w-full py-16 px-10 bg-light-main4 flex items-center justify-center flex-col"}>
         <FadeInDiv>
           <div className={"text-3xl lg:text-4xl font-fancy text-center tracking-tight lg:tracking-normal"}>
-            Designed and Crafted for Cuties
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].introduceTitle}
           </div>
         </FadeInDiv>
         <FadeInDiv>
           <div className={"font-main text-sm mt-5 max-w-screen-md text-center tracking-tight"}>
-            Gửi các Cuties, chúng mình luôn đồng hành cùng bạn qua từng thiết kế, chăm chút từng chi tiết để mỗi sản phẩm không chỉ là món đồ bạn mặc mà còn là sự gửi gắm của niềm tin, sự tự tin và nét duyên dáng rất riêng.
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].introduceText}
           </div>
         </FadeInDiv>
         <FadeInDiv>
@@ -158,6 +161,7 @@ export default function Homepage() {
 
 
 function FeedbackDisplay() {
+  const location = useLocation();
   const imgList = [
     "/images/feedback/Rectangle643.png",
     "/images/feedback/Rectangle 644.png",
@@ -174,7 +178,7 @@ function FeedbackDisplay() {
     <div className={"max-w-screen-lg w-full px-6 lg:px-20"}>
       <FadeInDiv>
         <div className={"tracking-tight text-2xl lg:text-3xl font-[500] text-light-text1 text-center font-title mb-8"}>
-          CUTIES FEEDBACK
+          {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].feedback}
         </div>
       </FadeInDiv>
 
@@ -220,11 +224,13 @@ function BestSellersDisplay({
   products: ProductSummaryFragment[];
 }) {
   const url = `/collections/best-sellers`;
+  const location = useLocation();
+
   return (
     <div className="mx-6 lg:mx-20 max-w-screen-xl flex flex-col items-center">
       <FadeInDiv>
         <div className={"tracking-tight text-2xl lg:text-3xl font-[500] text-light-text1 text-center font-title mb-8"}>
-          MOST PICK BY CUTIES
+          {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].mostPick}
         </div>
         {/*<div className={"text-base text-light-text2 font-main mb-10 max-w-md text-center tracking-tight"}>{description}</div>*/}
       </FadeInDiv>

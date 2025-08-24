@@ -6,6 +6,8 @@ import {Clock, Instagram, Mail, Phone} from 'lucide-react';
 import {Image} from '@shopify/hydrogen';
 import {FadeInItem, FadeInStagger} from '~/components/framer-motion/FadeInStagger';
 import {FadeInDiv} from '~/components/framer-motion/FadeInDiv';
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -37,9 +39,9 @@ export function Footer({
               {/* Brand name, description, media */}
               <FadeInItem viewportAmount={0.1}>
               <div className={"flex flex-col gap-1"}>
-                <Logo width={80} height={80}></Logo>
+                <Logo width={80} height={80} pathname={location.pathname}></Logo>
                 <div className={"text-sm tracking-tight"}>
-                  Designed and crafted with passion in HCM City, Vietnam
+                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerIntroduceText}
                 </div>
               </div>
               </FadeInItem>
@@ -48,7 +50,7 @@ export function Footer({
               <FadeInItem>
               <div className={"flex flex-col gap-3"}>
                 <div className={"text-sm font-[600] mb-2"}>
-                  THÔNG TIN
+                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoTitle}
                 </div>
                 <div className={"text-sm"}>
                   Về SoCutie
@@ -69,19 +71,19 @@ export function Footer({
               <FadeInItem>
               <div className={"flex flex-col gap-3"}>
                 <div className={"text-sm font-[600] mb-2"}>
-                  LIÊN HỆ
+                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactTitle}
                 </div>
                 <div className={"flex gap-3"}>
                   <Phone size={20}/>
                   <div className={"text-sm"}>
-                    090 951 8441
+                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactPhone}
                   </div>
                 </div>
 
                 <div className={"flex gap-3"}>
                   <Mail size={20}/>
                   <div className={"text-sm"}>
-                    socutiesg2023@gmail.com
+                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactEmail}
                   </div>
                 </div>
 
@@ -98,7 +100,7 @@ export function Footer({
               <FadeInItem>
               <div className={"flex flex-col gap-3"}>
                 <div className={"text-sm font-[600] mb-2"}>
-                  FOLLOW US
+                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerFollowUsTitle}
                 </div>
                 <div className={"flex gap-4 items-center max-w-screen-md"}>
                   <a
@@ -129,7 +131,7 @@ export function Footer({
             <div className={"max-w-screen-xl w-full mt-16 flex justify-center"}>
               <FadeInDiv>
                 <div className={"text-sm"}>
-                  © {new Date().getFullYear()} SoCutie. All rights reserved.
+                  © {new Date().getFullYear()} {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].storeName}. All rights reserved.
                 </div>
               </FadeInDiv>
             </div>

@@ -3,7 +3,7 @@ import type {CartLayout} from '~/components/cart/CartMain';
 import {CartForm, Money, type OptimisticCart} from '@shopify/hydrogen';
 import {useRef} from 'react';
 import {FetcherWithComponents, Link} from 'react-router';
-import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
 import {ArrowRight} from 'lucide-react';
 
 type CartSummaryProps = {

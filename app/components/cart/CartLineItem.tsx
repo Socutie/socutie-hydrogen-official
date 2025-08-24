@@ -7,7 +7,7 @@ import {ProductPrice} from '../ProductPrice';
 import {useAside} from '../Aside';
 import type {CartApiQueryFragment} from '../../../storefrontapi.generated';
 import {Minus, Plus, X} from 'lucide-react';
-import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
 
 type CartLine = OptimisticCartLine<CartApiQueryFragment>;
 

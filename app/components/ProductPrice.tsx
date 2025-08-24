@@ -1,6 +1,6 @@
 import {Money} from '@shopify/hydrogen';
 import type {MoneyV2} from '@shopify/hydrogen/storefront-api-types';
-import {formatVnd, getFullPriceString} from '~/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
 
 export function ProductPrice({
   price,
