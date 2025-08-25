@@ -62,12 +62,15 @@ export default function Page() {
   const {page} = useLoaderData<typeof loader>();
 
   return (
-    <div className="page">
-      <header>
-        <h1>{page.title}</h1>
-      </header>
-      <main dangerouslySetInnerHTML={{__html: page.body}} />
+    <div className={"flex items-center justify-center px-6 lg:px-20"}>
+      <div className="mt-48 w-full max-w-screen-xl">
+        <header>
+          <div className={"text-center font-cute font-[700] text-4xl mb-10"}>{page.title}</div>
+        </header>
+        <div className={"text-base font-main text-light-text1 font-[400] mt-4 [&_strong]:text-light-text1 [&_strong]:font-[600] [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"} dangerouslySetInnerHTML={{__html: page.body}} />
+      </div>
     </div>
+
   );
 }
 

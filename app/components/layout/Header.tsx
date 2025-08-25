@@ -101,12 +101,12 @@ export function Header({
         <div className={'flex items-center justify-between w-full max-w-screen-xl'}>
           <div  className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}>
             <HeaderMenuMobileToggle />
-            <div className={"hidden md:flex items-center"}>
+            <div className={"flex items-center"}>
               <ChangeLocaleCta pathname={location.pathname}/>
             </div>
-            <div className={"flex md:hidden items-center"}>
-              <SearchToggle />
-            </div>
+            {/*<div className={"flex md:hidden items-center"}>*/}
+            {/*  <SearchToggle />*/}
+            {/*</div>*/}
           </div>
           <div className={'w-[20%] flex justify-center items-center'}>
             <Logo pathname={location.pathname}/>
@@ -340,7 +340,7 @@ function HeaderCtas({
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
-    <nav className="flex gap-4 md:gap-6" role="navigation">
+    <nav className="flex gap-3 md:gap-6" role="navigation">
       {/*<a*/}
       {/*  className={"hidden md:flex"}*/}
       {/*  href={"https://www.instagram.com/socutie.sg"}*/}
@@ -357,9 +357,7 @@ function HeaderCtas({
       {/*</a>*/}
 
 
-      <div className={"hidden md:flex items-center"}>
-        <SearchToggle />
-      </div>
+
 
 
       {/*<a*/}
@@ -403,6 +401,10 @@ function HeaderCtas({
           </Await>
         </Suspense>
       </a>
+
+      <div className={"flex items-center"}>
+        <SearchToggle />
+      </div>
 
       <CartToggle cart={cart} />
     </nav>

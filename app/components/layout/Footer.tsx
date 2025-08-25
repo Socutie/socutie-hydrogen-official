@@ -1,5 +1,5 @@
 import {Suspense} from 'react';
-import {Await, NavLink, useLocation} from 'react-router';
+import {Await, Link, NavLink, useLocation} from 'react-router';
 import type {FooterQuery, HeaderQuery} from '../../../storefrontapi.generated';
 import {Logo} from '~/components/layout/Header';
 import {Clock, Instagram, Mail, Phone} from 'lucide-react';
@@ -7,7 +7,7 @@ import {Image} from '@shopify/hydrogen';
 import {FadeInItem, FadeInStagger} from '~/components/framer-motion/FadeInStagger';
 import {FadeInDiv} from '~/components/framer-motion/FadeInDiv';
 import {APP_STRINGS} from '~/common/constants/appStrings';
-import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {getAvailableLocaleFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -52,49 +52,47 @@ export function Footer({
                 <div className={"text-sm font-[600] mb-2"}>
                   {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoTitle}
                 </div>
-                <div className={"text-sm"}>
-                  Về SoCutie
-                </div>
-                <div className={"text-sm"}>
-                  Hướng dẫn mua hàng
-                </div>
-                <div className={"text-sm"}>
-                  Chính sách giao hàng
-                </div>
-                <div className={"text-sm"}>
-                  Chính sách bảo hành & đổi trả
-                </div>
+                <Link to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-giao-hang`}>
+                  <div className={"text-sm"}>
+                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoShippingText}
+                  </div>
+                </Link>
+                <Link to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-bao-hanh`}>
+                  <div className={"text-sm"}>
+                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoWarrantyText}
+                  </div>
+                </Link>
               </div>
                 </FadeInItem>
 
               {/* Contact */}
               <FadeInItem>
-              <div className={"flex flex-col gap-3"}>
-                <div className={"text-sm font-[600] mb-2"}>
-                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactTitle}
-                </div>
-                <div className={"flex gap-3"}>
-                  <Phone size={20}/>
-                  <div className={"text-sm"}>
-                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactPhone}
+                <div className={"flex flex-col gap-3"}>
+                  <div className={"text-sm font-[600] mb-2"}>
+                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactTitle}
                   </div>
-                </div>
+                  <div className={"flex gap-3"}>
+                    <Phone size={20}/>
+                    <div className={"text-sm"}>
+                      {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactPhone}
+                    </div>
+                  </div>
 
-                <div className={"flex gap-3"}>
-                  <Mail size={20}/>
-                  <div className={"text-sm"}>
-                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactEmail}
+                  <div className={"flex gap-3"}>
+                    <Mail size={20}/>
+                    <div className={"text-sm"}>
+                      {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactEmail}
+                    </div>
                   </div>
-                </div>
 
-                <div className={"flex gap-3"}>
-                  <Clock size={20}/>
-                  <div className={"text-sm"}>
-                    9:00 - 21:00
+                  <div className={"flex gap-3"}>
+                    <Clock size={20}/>
+                    <div className={"text-sm"}>
+                      9:00 - 21:00
+                    </div>
                   </div>
                 </div>
-              </div>
-                </FadeInItem>
+              </FadeInItem>
 
               {/* Media */}
               <FadeInItem>
@@ -128,7 +126,8 @@ export function Footer({
                 </FadeInItem>
             </div>
 
-            <div className={"max-w-screen-xl w-full mt-16 flex justify-center"}>
+            {/* Copyright */}
+            <div className={"max-w-screen-xl w-full mt-24 flex justify-center"}>
               <FadeInDiv>
                 <div className={"text-sm"}>
                   © {new Date().getFullYear()} {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].storeName}. All rights reserved.

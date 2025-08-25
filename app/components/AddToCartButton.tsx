@@ -1,8 +1,10 @@
-import {type FetcherWithComponents} from 'react-router';
+import {type FetcherWithComponents, useLocation} from 'react-router';
 import {CartForm, type OptimisticCartLineInput} from '@shopify/hydrogen';
 import {Loader2, LoaderCircle, ShoppingBag} from "lucide-react";
 import {useAside} from '~/components/Aside';
 import {ReactNode, useEffect, useState} from 'react';
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 export function AddToCartButton({
   analytics,
@@ -17,6 +19,7 @@ export function AddToCartButton({
   lines: Array<OptimisticCartLineInput>;
   onClick?: () => void;
 }) {
+  const location = useLocation();
   const {open} = useAside();
 
   const [fetcherState, setFetcherState] = useState("idle");
@@ -63,7 +66,7 @@ export function AddToCartButton({
                 : (
                   <div className={"relative z-10 flex gap-3 items-center justify-center"}>
                     <LoaderCircle size={20} className={"animate-spin"}/>
-                    <div className={""}>ĐANG XỬ LÝ</div>
+                    <div className={""}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loadingText}</div>
                   </div>
                 )
               }

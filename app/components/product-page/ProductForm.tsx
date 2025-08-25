@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router';
+import {Link, useLocation, useNavigate} from 'react-router';
 import {type MappedProductOptions} from '@shopify/hydrogen';
 import type {
   Maybe,
@@ -9,6 +9,8 @@ import {useAside} from '../Aside';
 import type {ProductFragment} from '../../../storefrontapi.generated';
 import {Minus, Plus, ShoppingBag} from 'lucide-react';
 import {useState} from "react";
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 export function ProductForm({
   productOptions,
@@ -18,6 +20,7 @@ export function ProductForm({
   selectedVariant: ProductFragment['selectedOrFirstAvailableVariant'];
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const {open} = useAside();
 
   const [addQuantity, setAddQuantity] = useState(1);
@@ -106,7 +109,9 @@ export function ProductForm({
 
       {/* Quantity selection */}
       <div>
-        <div className={'mb-2 text-sm'}>Số lượng</div>
+        <div className={'mb-2 text-sm'}>
+          {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].quantityText}
+        </div>
         <div
           className={`flex justify-between rounded-[4px] items-center w-fit border text-sm py-3 px-3 text-light-text1 border-light-bg2 font-[500]`}
         >
@@ -139,8 +144,8 @@ export function ProductForm({
       {/* Add to cart button */}
       <div className={'mt-2'}>
         <div className={'flex justify-between mb-2'}>
-          <div className={"text-sm text-light-text2"}>{selectedVariant?.availableForSale ? "Còn hàng" : "Đã hết hàng"}</div>
-          <div className={"text-sm text-light-text2"}>Mã SP: TX-0001-BK</div>
+          <div className={"text-sm text-light-text2"}>{selectedVariant?.availableForSale ? APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].isAvailableText : APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].isUnavailableText}</div>
+          <div className={"text-sm text-light-text2"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].skuText}: TX-0001-BK</div>
         </div>
 
         <AddToCartButton
@@ -164,8 +169,9 @@ export function ProductForm({
             {/*<ShoppingBag size={20} />*/}
             <div className={''}>
               {selectedVariant?.availableForSale
-                ? 'THÊM VÀO GIỎ HÀNG'
-                : 'LIÊN HỆ VỚI CHÚNG MÌNH'}
+                ? APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].addToCartText
+                : APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].contactUsText
+              }
             </div>
           </div>
         </AddToCartButton>
