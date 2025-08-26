@@ -29,7 +29,7 @@ Seexport const APP_STRINGS = {
     loadingText: "ĐANG XỬ LÝ",
     commitment1Text: "Freeship toàn quốc từ 500k",
     commitment2Text: "Shipping toàn quốc & quốc tế",
-    commitment3Text: "Bảo hành và đổi trả miễn phí trong 7 ngày",
+    commitment3Text: "Đổi trả miễn phí trong 7 ngày",
     descriptionTitle: "Mô tả sản phẩm",
     careInstructionTitle: "Hướng dẫn bảo quản",
     careInstructionText1: "✨ Cất giữ sản phẩm nơi khô ráo, thoáng mát, tránh ẩm mốc.",
