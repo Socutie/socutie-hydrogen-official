@@ -1,4 +1,4 @@
-export const APP_STRINGS = {
+Seexport const APP_STRINGS = {
   "vi-vn": {
     // General
     storeName: "Socutie",
@@ -8,9 +8,9 @@ export const APP_STRINGS = {
     feedback: "CUTIES FEEDBACK",
     introduceTitle: "Self-designed fashion for Cuties",
     introduceText: "Gửi đến các Cuties, mỗi thiết kế của chúng mình đều được nâng niu từ ý tưởng đến từng chi tiết, để không chỉ là trang phục bạn khoác lên người mà còn là lời gửi gắm của sự tự tin, phong cách và vẻ đẹp rất riêng của bạn.",
-
+    
     // Footer
-    footerIntroduceText: "Designed and crafted with passion in HCM City, Vietnam.",
+    footerIntroduceText: "Self-designed fashion for Cuties",
     footerInfoTitle: "CHÍNH SÁCH",
     footerInfoShippingText: "Chính sách giao hàng",
     footerInfoWarrantyText: "Chính sách bảo hành",
