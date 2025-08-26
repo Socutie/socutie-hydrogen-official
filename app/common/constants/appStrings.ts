@@ -7,7 +7,7 @@ export const APP_STRINGS = {
     mostPick: "MOST PICK BY CUTIES",
     feedback: "CUTIES FEEDBACK",
     introduceTitle: "Designed and Crafted for Cuties",
-    introduceText: "Gửi các Cuties, chúng mình luôn đồng hành cùng bạn qua từng thiết kế, chăm chút từng chi tiết để mỗi sản phẩm không chỉ là món đồ bạn mặc mà còn là sự gửi gắm của niềm tin, sự tự tin và nét duyên dáng rất riêng.",
+    introduceText: "Gửi đến các Cuties, mỗi thiết kế của chúng mình đều được nâng niu từ ý tưởng đến từng đường kim mũi chỉ, để không chỉ là trang phục bạn khoác lên người mà còn là lời gửi gắm của sự tự tin, phong cách và vẻ đẹp rất riêng của bạn.",
 
     // Footer
     footerIntroduceText: "Designed and crafted with passion in HCM City, Vietnam.",
