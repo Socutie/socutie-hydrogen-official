@@ -7,7 +7,7 @@ export const APP_STRINGS = {
     mostPick: "MOST PICK BY CUTIES",
     feedback: "CUTIES FEEDBACK",
     introduceTitle: "Self-designed fashion for Cuties",
-    introduceText: "Gửi đến các Cuties, mỗi thiết kế của chúng mình đều được nâng niu từ ý tưởng đến từng chi tiết, để không chỉ là trang phục bạn khoác lên người mà còn là lời gửi gắm của sự tự tin, phong cách và vẻ đẹp rất riêng của bạn.",
+    introduceText: "Xinh xắn quá mức khiến người khác rung động. Mỗi thiết kế của Socutie hướng đến phong cách đơn giản, nữ tính với một chút dễ thương, nhẹ nhàng mà có gu là đặc điểm của các Cuties đó!",
     
     // Footer
     footerIntroduceText: "Self-designed fashion for Cuties",
