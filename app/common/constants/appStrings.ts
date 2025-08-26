@@ -6,8 +6,8 @@ export const APP_STRINGS = {
     // Home page
     mostPick: "MOST PICK BY CUTIES",
     feedback: "CUTIES FEEDBACK",
-    introduceTitle: "Designed and Crafted for Cuties",
-    introduceText: "Gửi đến các Cuties, mỗi thiết kế của chúng mình đều được nâng niu từ ý tưởng đến từng đường kim mũi chỉ, để không chỉ là trang phục bạn khoác lên người mà còn là lời gửi gắm của sự tự tin, phong cách và vẻ đẹp rất riêng của bạn.",
+    introduceTitle: "Self-designed fashion for Cuties",
+    introduceText: "Gửi đến các Cuties, mỗi thiết kế của chúng mình đều được nâng niu từ ý tưởng đến từng chi tiết, để không chỉ là trang phục bạn khoác lên người mà còn là lời gửi gắm của sự tự tin, phong cách và vẻ đẹp rất riêng của bạn.",
 
     // Footer
     footerIntroduceText: "Designed and crafted with passion in HCM City, Vietnam.",
@@ -29,7 +29,7 @@ export const APP_STRINGS = {
     loadingText: "ĐANG XỬ LÝ",
     commitment1Text: "Freeship toàn quốc từ 500k",
     commitment2Text: "Shipping toàn quốc & quốc tế",
-    commitment3Text: "Bảo hành miễn phí trong 7 ngày",
+    commitment3Text: "Bảo hành và đổi trả miễn phí trong 7 ngày",
     descriptionTitle: "Mô tả sản phẩm",
     careInstructionTitle: "Hướng dẫn bảo quản",
     careInstructionText1: "✨ Cất giữ sản phẩm nơi khô ráo, thoáng mát, tránh ẩm mốc.",
