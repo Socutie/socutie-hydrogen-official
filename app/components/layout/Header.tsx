@@ -79,13 +79,13 @@ export function Header({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
+  const maxSubHeaderLengthOnMobile = 10;
+  const maxSubHeaderItems = 6;
   const validTitlesOnMobile = menu?.items
-    .filter((item) => item.title.length <= 10)
+    .filter((item) => item.title.length <= maxSubHeaderLengthOnMobile)
     .slice(0, 3)
     .map((item) => item.title);
 
-  const maxSubHeaderItems = 5;
   let countSubHeaderItems = 0;
 
   return (

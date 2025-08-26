@@ -157,9 +157,9 @@ export default function Product() {
               {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].storeName}
             </div>
             <div className={'font-[700] font-cute text-3xl mb-2 '}>{title}</div>
-            <div className={'font-[400] text-base tracking-tight mb-2 '}>
-              Item không thể thiếu trong tủ đồ của các nàng
-            </div>
+            {/*<div className={'font-[400] text-base tracking-tight mb-2 '}>*/}
+            {/*  Item không thể thiếu trong tủ đồ của các nàng*/}
+            {/*</div>*/}
             <ProductPrice
               price={selectedVariant?.price}
               compareAtPrice={selectedVariant?.compareAtPrice}

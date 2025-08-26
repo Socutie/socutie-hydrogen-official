@@ -1,4 +1,4 @@
-Seexport const APP_STRINGS = {
+export const APP_STRINGS = {
   "vi-vn": {
     // General
     storeName: "Socutie",
