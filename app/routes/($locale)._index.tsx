@@ -89,21 +89,28 @@ export default function Homepage() {
     .homepageCollections
     .find(c => c!.handle === "best-sellers");
 
+  const featuredCollection = data
+    .homepageCollections
+    .find(c => c!.handle !== "best-sellers");
+
   return (
     <div className="flex flex-col items-center">
       {/* Hero Banner */}
       <div className={"w-full"}>
-        <HeroBanner showSectionContent={true}/>
+        <HeroBanner collection={featuredCollection} showSectionContent={true}/>
       </div>
 
       <div className={"h-16"}></div>
 
       {/* Best Sellers Display */}
-      <div key={bestSellersCollection!.id}>
-        <BestSellersDisplay
-          products={bestSellersCollection!.products.nodes}
-        />
-      </div>
+      {bestSellersCollection && (
+        <div key={bestSellersCollection.id}>
+          <BestSellersDisplay
+            products={bestSellersCollection.products.nodes}
+          />
+        </div>
+      )}
+
 
       <div className={"h-16"}></div>
 

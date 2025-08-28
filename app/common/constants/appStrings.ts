@@ -2,6 +2,7 @@ export const APP_STRINGS = {
   "vi-vn": {
     // General
     storeName: "Socutie",
+    viewAllText: "Xem tất cả",
 
     // Cart
     cartTitle: "GIỎ HÀNG",
@@ -73,6 +74,7 @@ export const APP_STRINGS = {
   "en-us": {
     // General
     storeName: "Socutie",
+    viewAllText: "Discover all",
 
     // Cart
     cartTitle: "CART",

@@ -6,7 +6,7 @@ import {CartLineItem} from '~/components/cart/CartLineItem';
 import {CartSummary} from '~/components/cart/CartSummary';
 import {ArrowRight, ShoppingBag, ShoppingCart} from 'lucide-react';
 import {APP_STRINGS} from '~/common/constants/appStrings';
-import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {getAvailableLocaleFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
 
 export type CartLayout = 'page' | 'aside';
 
@@ -79,7 +79,7 @@ function CartEmpty({
           before:bg-light-bg1 before:translate-x-[-110%]
           before:transition-transform before:duration-500 before:ease-in-out
           hover:before:translate-x-0
-       `} to="/collections/best-sellers" onClick={close} prefetch="viewport">
+       `} to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/best-sellers`} onClick={close} prefetch="viewport">
         <div className="relative z-10">OUR BEST SELLERS</div>
         <ArrowRight size={20} className="relative z-10"/>
       </Link>

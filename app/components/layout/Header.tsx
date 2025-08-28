@@ -11,21 +11,29 @@ import type {
   HeaderQuery,
 } from '../../../storefrontapi.generated';
 import {useAside} from '~/components/Aside';
-import {Globe, Menu, Search, ShoppingCart, UserRound} from 'lucide-react';
+import {
+  ChevronDown,
+  Globe,
+  Menu,
+  Search,
+  ShoppingCart,
+  UserRound,
+} from 'lucide-react';
 import {I18nLocale} from '~/lib/i18n';
 import {
   cutAnyLocalePartFromPathname,
   getAvailableLocaleFromPathname,
-  getAvailableLocaleUrlPartFromPathname
-} from "~/common/utils/i18nUtils";
-import Tie from "/public/svg/tie.svg";
+  getAvailableLocaleUrlPartFromPathname,
+} from '~/common/utils/i18nUtils';
+import Tie from '/public/svg/tie.svg';
+import {APP_STRINGS} from '~/common/constants/appStrings';
 
 interface HeaderProps {
   header: HeaderQuery;
   cart: Promise<CartApiQueryFragment | null>;
   isLoggedIn: Promise<boolean>;
   publicStoreDomain: string;
-  i18n: I18nLocale
+  i18n: I18nLocale;
 }
 
 type Viewport = 'desktop' | 'mobile';
@@ -35,7 +43,7 @@ export function Header({
   isLoggedIn,
   cart,
   publicStoreDomain,
-  i18n
+  i18n,
 }: HeaderProps) {
   /* shopify nav */
   const {shop, menu} = header;
@@ -75,7 +83,7 @@ export function Header({
       lastScrollY.current = currentY;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, {passive: true});
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -98,18 +106,22 @@ export function Header({
         ${scrollDir === 'down' ? '-translate-y-32' : 'translate-y-0'}
         `}
       >
-        <div className={'flex items-center justify-between w-full max-w-screen-xl'}>
-          <div  className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}>
+        <div
+          className={'flex items-center justify-between w-full max-w-screen-xl'}
+        >
+          <div
+            className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}
+          >
             <HeaderMenuMobileToggle />
-            <div className={"flex items-center"}>
-              <ChangeLocaleCta pathname={location.pathname}/>
+            <div className={'flex items-center'}>
+              <ChangeLocaleCta pathname={location.pathname} />
             </div>
             {/*<div className={"flex md:hidden items-center"}>*/}
             {/*  <SearchToggle />*/}
             {/*</div>*/}
           </div>
           <div className={'w-[20%] flex justify-center items-center'}>
-            <Logo pathname={location.pathname}/>
+            <Logo pathname={location.pathname} />
           </div>
           <div className={'w-[40%] flex justify-end items-center'}>
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
@@ -134,20 +146,81 @@ export function Header({
             if (!item.url) return null;
 
             countSubHeaderItems++;
-            if(countSubHeaderItems > maxSubHeaderItems) return null;
+            if (countSubHeaderItems > maxSubHeaderItems) return null;
 
-            const url = getRealUrlFromMenuUrl(item.url, publicStoreDomain, header.shop.primaryDomain.url);
-            const localeUrlPart = getAvailableLocaleUrlPartFromPathname(location.pathname);
+            const url = getRealUrlFromMenuUrl(
+              item.url,
+              publicStoreDomain,
+              header.shop.primaryDomain.url,
+            );
+            const localeUrlPart = getAvailableLocaleUrlPartFromPathname(
+              location.pathname,
+            );
+
+            const hasDropdown = item.items && item.items.length > 0;
 
             return (
-              <NavLink
+              <div
                 key={item.id}
-                to={localeUrlPart + url}
-                prefetch="intent"
-                className={`${validTitlesOnMobile?.includes(item.title) ? "block" : "hidden md:block"} text-sm font-[600] hover:text-light-main transition-all duration-300`}
+                className={`group relative flex items-center h-full ${validTitlesOnMobile?.includes(item.title) ? 'flex' : 'hidden md:flex'}`}
               >
-                {item.title.toUpperCase()}
-              </NavLink>
+                <NavLink
+                  to={localeUrlPart + url}
+                  prefetch="intent"
+                  className={`text-sm font-[600] hover:text-light-main transition-all duration-300`}
+                >
+                  {item.title.toUpperCase()}
+                </NavLink>
+                {hasDropdown && (
+                  <div className={`
+                    absolute top-12 left-0 z-10 h-[2px] bg-light-main 
+                    opacity-0 transition-all duration-500 ease-in-out
+                    w-0 group-hover:w-[180px] group-hover:opacity-100
+                  `}/>
+                )}
+                {hasDropdown && (
+                  <div
+                    className={`
+                    opacity-0 pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 
+                    absolute transition-all duration-300 ease-in-out top-12 bg-light-main3
+                    rounded-b-[4px] shadow-md
+                    flex flex-col justify-start items-start w-[180px] py-6 px-6 gap-4
+                    text-sm font-[600] font-cute
+                  `}
+                  >
+                    <Link
+                      to={localeUrlPart + url}
+                      prefetch={'intent'}
+                      className={
+                        'hover:text-light-main transition-all duration-300 ease-in-out'
+                      }
+                    >
+                      {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].viewAllText}
+                    </Link>
+                    {item.items.map((subItem, index) => {
+                      if (!subItem.url) return null;
+                      const subUrl = getRealUrlFromMenuUrl(
+                        subItem.url,
+                        publicStoreDomain,
+                        header.shop.primaryDomain.url,
+                      );
+
+                      return (
+                        <Link
+                          to={localeUrlPart + subUrl}
+                          prefetch={'intent'}
+                          key={subItem.id}
+                          className={
+                            'hover:text-light-main transition-all duration-300 ease-in-out'
+                          }
+                        >
+                          {subItem.title}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
@@ -157,10 +230,14 @@ export function Header({
 }
 
 export function ChangeLocaleCta({pathname}: {pathname: string}) {
-  const targetLocale = getAvailableLocaleFromPathname(pathname) === "vi-vn" ? "/en-us" : "";
+  const targetLocale =
+    getAvailableLocaleFromPathname(pathname) === 'vi-vn' ? '/en-us' : '';
   const cutLocalePathname = cutAnyLocalePartFromPathname(pathname);
   return (
-    <a href={`${targetLocale}${cutLocalePathname}`} className="relative inline-block group">
+    <a
+      href={`${targetLocale}${cutLocalePathname}`}
+      className="relative inline-block group"
+    >
       {/* Globe icon */}
       <Globe
         strokeWidth={1.75}
@@ -169,14 +246,21 @@ export function ChangeLocaleCta({pathname}: {pathname: string}) {
 
       {/* Locale label */}
       <div className="absolute -top-[4px] -right-[4px] w-5 h-3 flex items-center justify-center text-[10px] font-bold bg-light-bg1 text-light-text1 rounded transition-colors duration-200 group-hover:text-light-main">
-        {targetLocale === "" ? "VN" : "EN"}
+        {targetLocale === '' ? 'VN' : 'EN'}
       </div>
     </a>
   );
-
 }
 
-export function Logo({width = 62, height = 62, pathname}: {width?: number, height?: number, pathname: string}) {
+export function Logo({
+  width = 62,
+  height = 62,
+  pathname,
+}: {
+  width?: number;
+  height?: number;
+  pathname: string;
+}) {
   return (
     <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}/`}>
       {/*<div className={`font-fancy font-medium text-[40px] ${className}`}>SoCutie</div>*/}
@@ -224,7 +308,78 @@ const CUSTOM_MENU = {
   ],
 };
 
-export function HeaderMenu({
+// export function HeaderMenu({
+//   menu,
+//   primaryDomainUrl,
+//   viewport,
+//   publicStoreDomain,
+// }: {
+//   menu: HeaderProps['header']['menu'];
+//   primaryDomainUrl: HeaderProps['header']['shop']['primaryDomain']['url'];
+//   viewport: Viewport;
+//   publicStoreDomain: HeaderProps['publicStoreDomain'];
+// }) {
+//   const {close} = useAside();
+//
+//   return (
+//     <nav className={`h-full flex gap-[3vw] items-center`}>
+//       {(menu || CUSTOM_MENU).items.map((item) => {
+//         if (!item.url) return null;
+//
+//         const url = getRealUrlFromMenuUrl(item.url, publicStoreDomain, primaryDomainUrl);
+//
+//         const hasDropdown = item.items && item.items.length > 0;
+//
+//         return (
+//           <div
+//             key={item.id}
+//             className="relative group h-full flex items-center"
+//           >
+//             <NavLink
+//               to={url}
+//               onClick={close}
+//               prefetch="intent"
+//               className="h-full font-[400] flex items-center text-sm tracking-wide transition-colors duration-300 ease-in-out group-hover:text-light-main"
+//             >
+//               {item.title.toUpperCase()}
+//               <span className="absolute left-0 bottom-6 h-[1px] w-full origin-left scale-x-0 bg-light-main transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+//             </NavLink>
+//
+//             {hasDropdown && (
+//               <div
+//                 className={`
+//                 absolute left-0 top-20 w-48 bg-light-bg1
+//                 transition-opacity duration-300 ease-in-out
+//                 opacity-0 group-hover:opacity-100
+//                 pointer-events-none group-hover:pointer-events-auto
+//                 z-50 py-4 border border-light-bg2
+//               `}
+//               >
+//                 {item.items.map((subItem) => {
+//                   if (!subItem.url) return null;
+//
+//                   const subUrl = getRealUrlFromMenuUrl(subItem.url, publicStoreDomain, primaryDomainUrl);
+//
+//                   return (
+//                     <Link
+//                       key={subItem.id}
+//                       to={subUrl}
+//                       className="block px-4 py-2 text-sm text-light-text1 transition-colors duration-300 hover:text-light-main"
+//                     >
+//                       {subItem.title}
+//                     </Link>
+//                   );
+//                 })}
+//               </div>
+//             )}
+//           </div>
+//         );
+//       })}
+//     </nav>
+//   );
+// }
+
+export function MobileMenu({
   menu,
   primaryDomainUrl,
   viewport,
@@ -238,101 +393,92 @@ export function HeaderMenu({
   const {close} = useAside();
 
   return (
-    <nav className={`h-full flex gap-[3vw] items-center`}>
-      {(menu || CUSTOM_MENU).items.map((item) => {
+    <nav className={`h-full flex gap-5 flex-col p-6 max-h-[calc(100vh-80px)] overflow-y-auto scrollbar-hidden`}>
+      {menu?.items.map((item) => {
         if (!item.url) return null;
-
-        const url = getRealUrlFromMenuUrl(item.url, publicStoreDomain, primaryDomainUrl);
-
-        const hasDropdown = item.items && item.items.length > 0;
-
         return (
-          <div
-            key={item.id}
-            className="relative group h-full flex items-center"
+          <div key={item.id}>
+            <MobileMenuItem  item={item}></MobileMenuItem>
+            <div className={"border-t border-light-bg2 mt-5"}/>
+          </div>
+
+        );
+      })}
+    </nav>
+  );
+
+  function MobileMenuItem({item}: {item: any}) {
+    const location = useLocation();
+
+    const url = getRealUrlFromMenuUrl(
+      item.url,
+      publicStoreDomain,
+      primaryDomainUrl,
+    );
+    const localeUrlPart = getAvailableLocaleUrlPartFromPathname(
+      location.pathname,
+    );
+
+    const hasDropdown = item.items && item.items.length > 0;
+
+    const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+
+    return (
+      <div key={item.id}>
+        <Link
+          prefetch="intent"
+          to={localeUrlPart + url}
+          onClick={(e) => {
+            if (hasDropdown) {
+              e.preventDefault();
+              setIsOpenDropdown(!isOpenDropdown);
+            } else {
+              close();
+            }
+          }}
+          className={`w-full flex justify-between items-center gap-4`}
+        >
+          <div className="text-sm font-[600] transition-all duration-300">
+            {item.title.toUpperCase()}
+          </div>
+          <ChevronDown className={`${hasDropdown ? '' : 'hidden'} ${isOpenDropdown ? "rotate-180" : "rotate-0"} transition-all duration-300 ease-in-out`} size={20} />
+        </Link>
+        <div
+          className={`
+            ${hasDropdown ? '' : 'hidden'} overflow-hidden ${isOpenDropdown ? 'opacity-100 max-h-64 mt-4' : 'opacity-0 max-h-0 mt-0'}
+            flex flex-col gap-4 text-sm font-cute font-[600] transition-all duration-300 ease-in-out
+          `}
+        >
+          <Link
+            to={localeUrlPart + url}
+            prefetch={'intent'}
+            onClick={close}
           >
-            <NavLink
-              to={url}
-              onClick={close}
-              prefetch="intent"
-              className="h-full font-[400] flex items-center text-sm tracking-wide transition-colors duration-300 ease-in-out group-hover:text-light-main"
-            >
-              {item.title.toUpperCase()}
-              <span className="absolute left-0 bottom-6 h-[1px] w-full origin-left scale-x-0 bg-light-main transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            </NavLink>
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].viewAllText}
+          </Link>
+          {item.items.map((subItem: any) => {
+            if (!subItem.url) return null;
+            const subUrl = getRealUrlFromMenuUrl(
+              subItem.url,
+              publicStoreDomain,
+              primaryDomainUrl,
+            );
 
-            {hasDropdown && (
-              <div
-                className={`
-                absolute left-0 top-20 w-48 bg-light-bg1 
-                transition-opacity duration-300 ease-in-out
-                opacity-0 group-hover:opacity-100
-                pointer-events-none group-hover:pointer-events-auto 
-                z-50 py-4 border border-light-bg2
-              `}
+            return (
+              <Link
+                to={localeUrlPart + subUrl}
+                prefetch={'intent'}
+                key={subItem.id}
+                onClick={close}
               >
-                {item.items.map((subItem) => {
-                  if (!subItem.url) return null;
-
-                  const subUrl = getRealUrlFromMenuUrl(subItem.url, publicStoreDomain, primaryDomainUrl);
-
-                  return (
-                    <Link
-                      key={subItem.id}
-                      to={subUrl}
-                      className="block px-4 py-2 text-sm text-light-text1 transition-colors duration-300 hover:text-light-main"
-                    >
-                      {subItem.title}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </nav>
-  );
-}
-
-export function HeaderMenuMobile({
-  menu,
-  primaryDomainUrl,
-  viewport,
-  publicStoreDomain,
-}: {
-  menu: HeaderProps['header']['menu'];
-  primaryDomainUrl: HeaderProps['header']['shop']['primaryDomain']['url'];
-  viewport: Viewport;
-  publicStoreDomain: HeaderProps['publicStoreDomain'];
-}) {
-  const {close} = useAside();
-
-  return (
-    <nav className={`h-full flex gap-6 flex-col p-6`}>
-      {(menu || CUSTOM_MENU).items.map((item) => {
-        if (!item.url) return null;
-
-        const url = getRealUrlFromMenuUrl(item.url, publicStoreDomain, primaryDomainUrl);
-
-        const hasDropdown = item.items && item.items.length > 0;
-
-        return (
-          <div key={item.id} className="relative group">
-            <NavLink
-              to={url}
-              onClick={close}
-              prefetch="intent"
-              className="text-sm font-[600] hover:text-light-main transition-all duration-300"
-            >
-              {item.title.toUpperCase()}
-              <span className="absolute left-0 -bottom-2 h-[1px] w-full origin-left scale-x-0 bg-light-main transition-transform duration-500 ease-in-out group-hover:scale-x-100"></span>
-            </NavLink>
-          </div>
-        );
-      })}
-    </nav>
-  );
+                {subItem.title}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 }
 
 function HeaderCtas({
@@ -355,10 +501,6 @@ function HeaderCtas({
       {/*    className="object-contain"*/}
       {/*  />*/}
       {/*</a>*/}
-
-
-
-
 
       {/*<a*/}
       {/*  className={"hidden md:flex"}*/}
@@ -402,7 +544,7 @@ function HeaderCtas({
         </Suspense>
       </a>
 
-      <div className={"flex items-center"}>
+      <div className={'flex items-center'}>
         <SearchToggle />
       </div>
 
@@ -415,7 +557,9 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button onClick={() => open('mobile')}>
-      <Menu className={'transition-colors duration-200 hover:text-light-main'}/>
+      <Menu
+        className={'transition-colors duration-200 hover:text-light-main'}
+      />
     </button>
   );
 }
@@ -490,12 +634,13 @@ function getRealUrlFromMenuUrl(
   publicStoreDomain: string,
   primaryDomainUrl: string,
 ): string {
-
-  const cutLocalePathname = cutAnyLocalePartFromPathname(new URL(menuUrl).pathname);
+  const cutLocalePathname = cutAnyLocalePartFromPathname(
+    new URL(menuUrl).pathname,
+  );
 
   return menuUrl.includes('myshopify.com') ||
-  menuUrl.includes(publicStoreDomain) ||
-  menuUrl.includes(primaryDomainUrl)
+    menuUrl.includes(publicStoreDomain) ||
+    menuUrl.includes(primaryDomainUrl)
     ? cutLocalePathname || '/'
     : menuUrl;
 }

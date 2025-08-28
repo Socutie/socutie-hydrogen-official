@@ -229,7 +229,7 @@ export default function Product() {
             <div className={'border-t border-t-light-bg2 w-full mt-6'} />
 
             {/* Details */}
-            <ProductDetailDisplay2
+            <ProductDetailDisplay
               title={APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].careInstructionTitle}
               texts={[
                 APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].careInstructionText1,
@@ -238,7 +238,7 @@ export default function Product() {
               ]}
             />
             <div className={'border-t border-t-light-bg2 w-full'} />
-            <ProductDetailDisplay2
+            <ProductDetailDisplay
               title={APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].shippingPolicyTitle}
               texts={[
                 APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].shippingPolicyText1,
@@ -246,7 +246,7 @@ export default function Product() {
               ]}
             />
             <div className={'border-t border-t-light-bg2 w-full'} />
-            <ProductDetailDisplay2
+            <ProductDetailDisplay
               title={APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].warrantyPolicyTitle}
               texts={[
                 APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].warrantyPolicyText1,
@@ -306,7 +306,7 @@ export default function Product() {
     </div>
   );
 
-  function ProductDetailDisplay2({title, texts}: {title: string, texts: string[]}) {
+  function ProductDetailDisplay({title, texts}: {title: string, texts: string[]}) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
