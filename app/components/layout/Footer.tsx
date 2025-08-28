@@ -4,10 +4,16 @@ import type {FooterQuery, HeaderQuery} from '../../../storefrontapi.generated';
 import {Logo} from '~/components/layout/Header';
 import {Clock, Instagram, Mail, Phone} from 'lucide-react';
 import {Image} from '@shopify/hydrogen';
-import {FadeInItem, FadeInStagger} from '~/components/framer-motion/FadeInStagger';
+import {
+  FadeInItem,
+  FadeInStagger,
+} from '~/components/framer-motion/FadeInStagger';
 import {FadeInDiv} from '~/components/framer-motion/FadeInDiv';
 import {APP_STRINGS} from '~/common/constants/appStrings';
-import {getAvailableLocaleFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
+import {
+  getAvailableLocaleFromPathname,
+  getAvailableLocaleUrlPartFromPathname,
+} from '~/common/utils/i18nUtils';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -26,7 +32,10 @@ export function Footer({
     <Suspense>
       <Await resolve={footerPromise}>
         {(footer) => (
-          <footer key={location.pathname} className="w-full py-16 bg-light-main3 flex flex-col items-center justify-center px-6 lg:px-20">
+          <footer
+            key={location.pathname}
+            className="w-full py-16 bg-light-main3 flex flex-col items-center px-6 lg:px-20"
+          >
             {/*{footer?.menu && header.shop.primaryDomain?.url && (*/}
             {/*  <FooterMenu*/}
             {/*    menu={footer.menu}*/}
@@ -34,107 +43,161 @@ export function Footer({
             {/*    publicStoreDomain={publicStoreDomain}*/}
             {/*  />*/}
             {/*)}*/}
-            <FadeInStagger viewportAmount={0.1}>
-            <div className={"max-w-screen-xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12"}>
-              {/* Brand name, description, media */}
-              <FadeInItem viewportAmount={0.1}>
-              <div className={"flex flex-col gap-1"}>
-                <Logo width={80} height={80} pathname={location.pathname}></Logo>
-                <div className={"text-sm tracking-tight"}>
-                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerIntroduceText}
-                </div>
-              </div>
-              </FadeInItem>
-
-              {/* Info */}
-              <FadeInItem>
-              <div className={"flex flex-col gap-3"}>
-                <div className={"text-sm font-[600] mb-2"}>
-                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoTitle}
-                </div>
-                <Link to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-giao-hang`}>
-                  <div className={"text-sm"}>
-                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoShippingText}
-                  </div>
-                </Link>
-                <Link to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-bao-hanh`}>
-                  <div className={"text-sm"}>
-                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerInfoWarrantyText}
-                  </div>
-                </Link>
-              </div>
-                </FadeInItem>
-
-              {/* Contact */}
-              <FadeInItem>
-                <div className={"flex flex-col gap-3"}>
-                  <div className={"text-sm font-[600] mb-2"}>
-                    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactTitle}
-                  </div>
-                  <div className={"flex gap-3"}>
-                    <Phone size={20}/>
-                    <div className={"text-sm"}>
-                      {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactPhone}
+            <div className={'w-full max-w-screen-xl'}>
+              <FadeInStagger>
+                <div
+                  className={
+                    'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-12'
+                  }
+                >
+                  {/* Brand name, description, media */}
+                  <FadeInItem viewportAmount={0.1}>
+                    <div className={'flex flex-col gap-1'}>
+                      <Logo
+                        width={80}
+                        height={80}
+                        pathname={location.pathname}
+                      ></Logo>
+                      <div className={'text-sm tracking-tight'}>
+                        {
+                          APP_STRINGS[
+                            getAvailableLocaleFromPathname(location.pathname)
+                          ].footerIntroduceText
+                        }
+                      </div>
                     </div>
-                  </div>
+                  </FadeInItem>
 
-                  <div className={"flex gap-3"}>
-                    <Mail size={20}/>
-                    <div className={"text-sm"}>
-                      {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerContactEmail}
+                  {/* Info */}
+                  <FadeInItem>
+                    <div className={'flex flex-col gap-3'}>
+                      <div className={'text-sm font-[600] mb-2'}>
+                        {
+                          APP_STRINGS[
+                            getAvailableLocaleFromPathname(location.pathname)
+                          ].footerInfoTitle
+                        }
+                      </div>
+                      <Link
+                        to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-giao-hang`}
+                      >
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                            ].footerInfoShippingText
+                          }
+                        </div>
+                      </Link>
+                      <Link
+                        to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-bao-hanh`}
+                      >
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                            ].footerInfoWarrantyText
+                          }
+                        </div>
+                      </Link>
                     </div>
-                  </div>
+                  </FadeInItem>
 
-                  <div className={"flex gap-3"}>
-                    <Clock size={20}/>
-                    <div className={"text-sm"}>
-                      9:00 - 21:00
+                  {/* Contact */}
+                  <FadeInItem>
+                    <div className={'flex flex-col gap-3'}>
+                      <div className={'text-sm font-[600] mb-2'}>
+                        {
+                          APP_STRINGS[
+                            getAvailableLocaleFromPathname(location.pathname)
+                          ].footerContactTitle
+                        }
+                      </div>
+                      <div className={'flex gap-3'}>
+                        <Phone size={20} />
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                            ].footerContactPhone
+                          }
+                        </div>
+                      </div>
+
+                      <div className={'flex gap-3'}>
+                        <Mail size={20} />
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                            ].footerContactEmail
+                          }
+                        </div>
+                      </div>
+
+                      <div className={'flex gap-3'}>
+                        <Clock size={20} />
+                        <div className={'text-sm'}>9:00 - 21:00</div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </FadeInItem>
+                  </FadeInItem>
 
-              {/* Media */}
-              <FadeInItem>
-              <div className={"flex flex-col gap-3"}>
-                <div className={"text-sm font-[600] mb-2"}>
-                  {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].footerFollowUsTitle}
+                  {/* Media */}
+                  <FadeInItem>
+                    <div className={'flex flex-col gap-3'}>
+                      <div className={'text-sm font-[600] mb-2'}>
+                        {
+                          APP_STRINGS[
+                            getAvailableLocaleFromPathname(location.pathname)
+                          ].footerFollowUsTitle
+                        }
+                      </div>
+                      <div
+                        className={'flex gap-4 items-center max-w-screen-md'}
+                      >
+                        <a
+                          href={'https://www.instagram.com/socutie.sg'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Instagram className={'text-light-text2'} />
+                        </a>
+                        <a
+                          href={'https://www.tiktok.com/@socutie.sg'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src="/images/tik-tok.png"
+                            alt="hero-banner"
+                            width={20}
+                            height={20}
+                            className="w-5 h-5 object-contain grayscale opacity-80"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </FadeInItem>
                 </div>
-                <div className={"flex gap-4 items-center max-w-screen-md"}>
-                  <a
-                    href={"https://www.instagram.com/socutie.sg"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Instagram className={"text-light-text2"}/>
-                  </a>
-                  <a
-                    href={"https://www.tiktok.com/@socutie.sg"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/images/tik-tok.png"
-                      alt="hero-banner"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 object-contain grayscale opacity-80"
-                    />
-                  </a>
+
+                {/* Copyright */}
+                <div
+                  className={'max-w-screen-xl w-full mt-24 flex justify-center'}
+                >
+                  <FadeInDiv>
+                    <div className={'text-sm'}>
+                      © {new Date().getFullYear()}{' '}
+                      {
+                        APP_STRINGS[
+                          getAvailableLocaleFromPathname(location.pathname)
+                        ].storeName
+                      }
+                      . All rights reserved.
+                    </div>
+                  </FadeInDiv>
                 </div>
-              </div>
-                </FadeInItem>
+              </FadeInStagger>
             </div>
-
-            {/* Copyright */}
-            <div className={"max-w-screen-xl w-full mt-24 flex justify-center"}>
-              <FadeInDiv>
-                <div className={"text-sm"}>
-                  © {new Date().getFullYear()} {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].storeName}. All rights reserved.
-                </div>
-              </FadeInDiv>
-            </div>
-            </FadeInStagger>
           </footer>
         )}
       </Await>
@@ -173,13 +236,9 @@ function FooterMenu({
             key={item.id}
             prefetch="intent"
             style={activeLinkStyle}
-
             to={url}
           >
-            <div className={"text-light-text1"}>
-              {item.title}
-            </div>
-
+            <div className={'text-light-text1'}>{item.title}</div>
           </NavLink>
         );
       })}

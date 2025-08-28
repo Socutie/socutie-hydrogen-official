@@ -1,3 +1,5 @@
+import {AvailableLocale} from '~/common/utils/i18nUtils';
+
 export function formatVnd(vnd: string): string {
   const vndNum = parseFloat(vnd);
   return vndNum.toLocaleString("vi-VN"); // formats with dots as thousand separators
@@ -11,14 +13,52 @@ export function formatUsd(usd: string): string {
   });
 }
 
-export function getFullPriceString(amount: string, currency: string): string {
-  if(currency === "VND") {
-    return formatVnd(amount) + "₫";
+const USD_TO_VND_RATE = 26000;
+
+function usdToVnd(usd: number): number {
+  return usd * USD_TO_VND_RATE;
+}
+
+function vndToUsd(vnd: number): number {
+  return vnd / USD_TO_VND_RATE;
+}
+
+function roundUsdTo99(price: number): number {
+  return Math.round(price) - 0.01; // e.g. 16.15 → 15.99, 16.75 → 16.99
+}
+
+function roundUsdTo50(price: number): number {
+  return Math.round(price * 2) / 2; // e.g. 16.15 → 16.00, 16.70 → 16.50
+}
+
+export function getFullPriceString(
+  amount: string,
+  currency: string,
+  locale: AvailableLocale
+): string {
+  const numericAmount = parseFloat(amount);
+
+  if (locale === "vi-vn") {
+    if (currency === "VND") {
+      return formatVnd(numericAmount.toString()) + "₫";
+    }
+    if (currency === "USD") {
+      const exchanged = usdToVnd(numericAmount);
+      return formatVnd(exchanged.toString()) + "₫";
+    }
   }
-  if(currency === "USD") {
-    return "$" + formatUsd(amount);
+
+  if (locale === "en-us") {
+    if (currency === "USD") {
+      return "$" + formatUsd(roundUsdTo99(numericAmount).toString());
+    }
+    if (currency === "VND") {
+      const exchanged = vndToUsd(numericAmount);
+      return "$" + formatUsd(roundUsdTo99(exchanged).toString());
+    }
   }
-  return amount + " " + currency;
+
+  return amount + " " + currency; // fallback
 }
 
 export function discountPercentage(price: string, compareAt: string): string {

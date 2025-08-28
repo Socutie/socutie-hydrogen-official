@@ -93,7 +93,7 @@ export default function Homepage() {
     <div className="flex flex-col items-center">
       {/* Hero Banner */}
       <div className={"w-full"}>
-        <HeroBanner/>
+        <HeroBanner showSectionContent={true}/>
       </div>
 
       <div className={"h-16"}></div>
@@ -163,19 +163,23 @@ export default function Homepage() {
 function FeedbackDisplay() {
   const location = useLocation();
   const imgList = [
-    "/images/feedback/Rectangle643.png",
-    "/images/feedback/Rectangle 644.png",
-    "/images/feedback/Rectangle643.png",
-    "/images/feedback/Rectangle 645.png",
-    "/images/feedback/Rectangle 646.png",
-    "/images/feedback/Rectangle 647.png",
-    "/images/feedback/Rectangle 648.png",
-    "/images/feedback/Rectangle 649.png",
-    "/images/feedback/Rectangle 650.png",
-    "/images/feedback/Rectangle 647.png"
-  ]
+    "/images/feedback/feedback1.jpg",
+    "/images/feedback/feedback2.jpg",
+    "/images/feedback/feedback3.jpg",
+    "/images/feedback/feedback4.jpg",
+    "/images/feedback/feedback5.jpg",
+    "/images/feedback/feedback6.jpg",
+    "/images/feedback/feedback7.jpg",
+    "/images/feedback/feedback8.jpg",
+    "/images/feedback/feedback9.jpg",
+    "/images/feedback/feedback10.jpg"
+  ];
+
+  const mobileShowingFeedbacks = 9;
+  const desktopShowingFeedbacks = 10;
+
   return (
-    <div className={"max-w-screen-lg w-full px-6 lg:px-20"}>
+    <div className={"max-w-screen-sm lg:max-w-screen-lg w-full px-6 lg:px-20"}>
       <FadeInDiv>
         <div className={"tracking-tight text-2xl lg:text-3xl font-[500] text-light-text1 text-center font-title mb-8"}>
           {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].feedback}
@@ -184,10 +188,10 @@ function FeedbackDisplay() {
 
       <FadeInStagger>
         <div className={"grid gap-6 lg:gap-8 grid-cols-3 lg:grid-cols-5"}>
-          {imgList.slice(0, 10).map((imgSrc, index) => (
+          {imgList.slice(0, desktopShowingFeedbacks).map((imgSrc, index) => (
             <FadeInItem key={imgSrc}>
               <div
-                className={index === 9 ? "hidden lg:block" : ""}
+                className={index === mobileShowingFeedbacks ? "hidden lg:block" : ""}
               >
                 <FeedbackImage src={imgSrc} />
               </div>

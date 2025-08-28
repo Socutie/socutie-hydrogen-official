@@ -145,7 +145,7 @@ export function ProductForm({
       <div className={'mt-2'}>
         <div className={'flex justify-between mb-2'}>
           <div className={"text-sm text-light-text2"}>{selectedVariant?.availableForSale ? APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].isAvailableText : APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].isUnavailableText}</div>
-          <div className={"text-sm text-light-text2"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].skuText}: TX-0001-BK</div>
+          <div className={"text-sm text-light-text2"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].shippingTimeText}</div>
         </div>
 
         <AddToCartButton

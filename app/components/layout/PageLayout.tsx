@@ -1,4 +1,4 @@
-import {Await, Link} from 'react-router';
+import {Await, Link, useLocation} from 'react-router';
 import {Suspense, useId} from 'react';
 import type {
   CartApiQueryFragment,
@@ -15,6 +15,8 @@ import {
 } from '~/components/SearchFormPredictive';
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 import {I18nLocale} from '~/lib/i18n';
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -60,8 +62,10 @@ export function PageLayout({
 }
 
 function CartAside({cart}: {cart: PageLayoutProps['cart']}) {
+  const location = useLocation();
+  const heading = APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].cartTitle;
   return (
-    <Aside type="cart" heading="GIỎ HÀNG">
+    <Aside type="cart" heading={heading}>
       <Suspense fallback={<p>Loading cart ...</p>}>
         <Await resolve={cart}>
           {(cart) => {
@@ -74,16 +78,21 @@ function CartAside({cart}: {cart: PageLayoutProps['cart']}) {
 }
 
 function SearchAside() {
+  const location = useLocation();
+  const heading = APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].searchTitle;
+
   const queriesDatalistId = useId();
   return (
-    <Aside type="search" heading="TÌM KIẾM">
+    <Aside type="search" heading={heading}>
       <div className="predictive-search w-full px-6">
         <br />
         <SearchFormPredictive>
           {({fetchResults, goToSearch, inputRef}) => (
-            <div className={"w-full"}>
+            <div className={'w-full'}>
               <input
-                className={"w-full py-2 transition-all duration-300 border-b-[2px] border-b-light-bg2 focus:border-b-light-text1 outline-none focus:outline-none"}
+                className={
+                  'w-full py-2 transition-all duration-300 border-b-[2px] border-b-light-bg2 focus:border-b-light-text1 outline-none focus:outline-none'
+                }
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
@@ -107,7 +116,7 @@ function SearchAside() {
             const {articles, collections, pages, products, queries} = items;
 
             if (state === 'loading' && term.current) {
-              return <div className={"mt-8"}>Loading...</div>;
+              return <div className={'mt-8'}>Loading...</div>;
             }
 
             if (!total) {

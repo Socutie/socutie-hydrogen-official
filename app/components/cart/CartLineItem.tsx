@@ -2,12 +2,14 @@ import type {CartLineUpdateInput} from '@shopify/hydrogen/storefront-api-types';
 import type {CartLayout} from '~/components/cart/CartMain';
 import {CartForm, Image, type OptimisticCartLine} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
-import {Link} from 'react-router';
+import {Link, useLocation} from 'react-router';
 import {ProductPrice} from '../ProductPrice';
 import {useAside} from '../Aside';
 import type {CartApiQueryFragment} from '../../../storefrontapi.generated';
 import {Minus, Plus, X} from 'lucide-react';
 import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {APP_STRINGS} from '~/common/constants/appStrings';
 
 type CartLine = OptimisticCartLine<CartApiQueryFragment>;
 
@@ -22,6 +24,7 @@ export function CartLineItem({
   layout: CartLayout;
   line: CartLine;
 }) {
+  const location = useLocation();
   const {id, merchandise} = line;
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
@@ -52,20 +55,22 @@ export function CartLineItem({
                 }
               }}
             >
-              <div className={"font-[600] font-cute text-base"}>{product.title}</div>
+              <div className={"font-[600] font-cute text-lg"}>{product.title}</div>
             </Link>
             <ul>
-              {selectedOptions.map((option) => (
-                <li key={option.name}>
-                  <div className={"text-sm text-light-text2"}>
-                    {option.name}: {option.value}
-                  </div>
-                </li>
-              ))}
+              {selectedOptions.map((option) => {
+                if(option.value === "Default Title") return;
+                return (
+                  <li key={option.name}>
+                    <div className={"text-sm text-light-text2 tracking-tight"}>
+                      {option.name}: {option.value}
+                    </div>
+                  </li>
+              )})}
             </ul>
           </div>
           <div className={"flex flex-col gap-1"}>
-            <div className={`sm:hidden text-sm font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode)}</div>
+            <div className={`sm:hidden text-sm font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode, getAvailableLocaleFromPathname(location.pathname))}</div>
             <CartLineQuantity line={line} />
           </div>
         </div>
@@ -73,7 +78,7 @@ export function CartLineItem({
         {/* Right side */}
         <div className={"hidden sm:flex flex-col justify-end items-end"}>
           {/*<ProductPrice price={line?.cost?.totalAmount} compareAtPrice={line?.cost?.compareAtAmountPerQuantity}/>*/}
-          <div className={`text-base font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode)}</div>
+          <div className={`text-base font-normal text-light-text1`}>{getFullPriceString(line?.cost?.totalAmount.amount, line?.cost?.totalAmount.currencyCode, getAvailableLocaleFromPathname(location.pathname))}</div>
         </div>
       </div>
     </li>
@@ -139,6 +144,8 @@ function CartLineRemoveButton({
   lineIds: string[];
   disabled: boolean;
 }) {
+  const location = useLocation();
+
   return (
     <CartForm
       fetcherKey={getUpdateKey(lineIds)}
@@ -147,7 +154,7 @@ function CartLineRemoveButton({
       inputs={{lineIds}}
     >
       <button disabled={disabled} type="submit">
-        <div className={"text-sm text-light-text2 hover:underline transition-all duration-300"}>Xóa</div>
+        <div className={"text-sm text-light-text2 hover:underline transition-all duration-300"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].removeText}</div>
       </button>
     </CartForm>
   );

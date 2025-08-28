@@ -10,6 +10,8 @@ import {ProductCollectionSortKeys} from '@shopify/hydrogen/storefront-api-types'
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {ChevronDown} from 'lucide-react';
 import {FadeInItem, FadeInStagger} from '~/components/framer-motion/FadeInStagger';
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 const PRODUCTS_PER_PAGE = 30;
 
@@ -47,8 +49,9 @@ async function loadCriticalData({
   }
 
   const url = new URL(request.url);
-  const sortKey = (url.searchParams.get('sortKey') || "BEST_SELLING") as ProductCollectionSortKeys;
-  const reverse = (url.searchParams.get('reverse') === "true") || false;
+  const sortKey = (url.searchParams.get('sortKey') || "CREATED") as ProductCollectionSortKeys;
+  const reverseParam = url.searchParams.get('reverse');
+  const reverse = reverseParam !== null ? reverseParam === "true" : true;
 
   const [{collection}] = await Promise.all([
     storefront.query(COLLECTION_WITH_PRODUCTS_QUERY, {
@@ -98,7 +101,7 @@ export default function Collection() {
     <div className="w-full flex flex-col items-center">
       {/* Title/Banner */}
       <div className={"w-full"}>
-        {imgUrl ? (<HeroBanner src={imgUrl.url}></HeroBanner>) : (<HeroBanner></HeroBanner>)}
+        {imgUrl ? (<HeroBanner aspectClass={"aspect-[3/4] lg:aspect-[21/9]"} src={imgUrl.url}></HeroBanner>) : (<HeroBanner aspectClass={"aspect-[3/4] lg:aspect-[21/9]"}></HeroBanner>)}
 
       </div>
 
@@ -117,7 +120,7 @@ export default function Collection() {
       <div className={"w-full  flex items-center justify-center px-6 lg:px-20 mb-6"}>
         <div className={"w-full max-w-screen-xl flex items-center justify-between  py-3 border-l-0 border-r-0 border border-light-bg2"}>
           <div className={"text-sm"}>
-            {productsCountString} sản phẩm
+            {productsCountString} {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].productCountText}
           </div>
           <div className="flex items-center gap-2 text-sm">
             <div className={"hidden sm:block"}>Sort by:</div>
@@ -158,26 +161,28 @@ export default function Collection() {
   );
 }
 
-const sortOptions = [
-  {label: "Bán chạy nhất", value: "BEST_SELLING", reverse: false},
-  {label: "Mới nhất", value: "CREATED", reverse: true},
-  {label: "Cũ nhất", value: "CREATED", reverse: false},
-  {label: "Giá thấp đến cao", value: "PRICE", reverse: false},
-  {label: "Giá cao đến thấp", value: "PRICE", reverse: true},
-];
+
 
 export function SortDropdown() {
-  const [open, setOpen] = useState(false);
-  const [currentLabel, setCurrentLabel] = useState('Bán chạy nhất');
-  const navigate = useNavigate();
   const location = useLocation();
+
+  const sortOptions = [
+    {label: APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].sortLabelNewest, value: "CREATED", reverse: true},
+    {label: APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].sortLabelBestSelling, value: "BEST_SELLING", reverse: false},
+    {label: APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].sortLabelLowestPrice, value: "PRICE", reverse: false},
+    {label: APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].sortLabelHighestPrice, value: "PRICE", reverse: true},
+  ];
+
+  const [open, setOpen] = useState(false);
+  const [currentLabel, setCurrentLabel] = useState(sortOptions[0].label);
+  const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const currentSort =
-    new URLSearchParams(location.search).get("sortKey") || "BEST_SELLING";
+    new URLSearchParams(location.search).get("sortKey") || sortOptions[0].value;
 
-  const currentReverse =
-    new URLSearchParams(location.search).get("reverse") === "true" || false;
+  const reverseParam = new URLSearchParams(location.search).get("reverse");
+  const currentReverse = reverseParam !== null ? reverseParam === "true" : sortOptions[0].reverse;
 
   function handleSelect(label: string, value: string, reverse: boolean) {
     setCurrentLabel(label);
@@ -189,7 +194,7 @@ export function SortDropdown() {
   }
 
   useEffect(() => {
-    setCurrentLabel(sortOptions.find((o) => (o.value === currentSort && o.reverse === currentReverse))?.label || "Bán chạy nhất");
+    setCurrentLabel(sortOptions.find((o) => (o.value === currentSort && o.reverse === currentReverse))?.label || sortOptions[0].label);
 
     function handleClickOutside(e: MouseEvent) {
       if (
@@ -210,7 +215,7 @@ export function SortDropdown() {
     <div className="relative" ref={dropdownRef}>
       {/* Selected value */}
       <button
-        className="w-[180px] px-3 py-2 border border-light-bg2 flex justify-between items-center rounded-[4px]"
+        className="w-[160px] px-3 py-2 border border-light-bg2 flex justify-between items-center rounded-[4px]"
         onClick={() => setOpen((prev) => !prev)}
       >
         <div className={"text-sm font-[500]"}>
@@ -220,7 +225,7 @@ export function SortDropdown() {
       </button>
 
       {/* Dropdown menu */}
-      <div className={`transition-all rounded-b-[4px] duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"} absolute flex flex-col w-[180px] left-0 right-0 bg-white border-t-0 border border-light-bg2 z-40`}>
+      <div className={`transition-all rounded-b-[4px] duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"} absolute flex flex-col w-[160px] left-0 right-0 bg-white border-t-0 border border-light-bg2 z-40`}>
         {sortOptions.map((option) => (
           <button
             key={option.value + option.reverse}

@@ -1,4 +1,4 @@
-import {Link, useFetcher, type Fetcher} from 'react-router';
+import {Link, useFetcher, type Fetcher, useLocation} from 'react-router';
 import {Image, Money} from '@shopify/hydrogen';
 import React, {useRef, useEffect} from 'react';
 import {
@@ -7,7 +7,8 @@ import {
   type PredictiveSearchReturn,
 } from '~/lib/search';
 import {useAside} from './Aside';
-import {formatVnd} from '~/common/utils/stringUtils';
+import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 type PredictiveSearchItems = PredictiveSearchReturn['result']['items'];
 
@@ -201,6 +202,8 @@ function SearchResultsPredictiveProducts({
   products,
   closeSearch,
 }: PartialPredictiveSearchResult<'products'>) {
+  const location = useLocation();
+
   if (!products.length) return null;
 
   return (
@@ -229,7 +232,7 @@ function SearchResultsPredictiveProducts({
                 <div className={"ml-2"}>
                   <div className={"text-lg font-cute font-[600]"}>{product.title}</div>
                   {/*<small>{price && <Money data={price} />}</small>*/}
-                  <div className={`text-sm font-normal text-light-text1`}>{formatVnd(price?.amount ?? "0")}{price?.currencyCode === "VND" ? "₫" : "$"}</div>
+                  <div className={`text-sm font-normal text-light-text1`}>{getFullPriceString(price?.amount ?? "0", price?.currencyCode ?? "VND", getAvailableLocaleFromPathname(location.pathname))}</div>
                 </div>
               </Link>
             </li>

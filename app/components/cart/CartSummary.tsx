@@ -2,9 +2,11 @@ import type {CartApiQueryFragment} from '../../../storefrontapi.generated';
 import type {CartLayout} from '~/components/cart/CartMain';
 import {CartForm, Money, type OptimisticCart} from '@shopify/hydrogen';
 import {useRef} from 'react';
-import {FetcherWithComponents, Link} from 'react-router';
+import {FetcherWithComponents, Link, useLocation} from 'react-router';
 import {formatVnd, getFullPriceString} from '~/common/utils/stringUtils';
-import {ArrowRight} from 'lucide-react';
+import {ArrowRight, BadgePercent, TicketPercent} from 'lucide-react';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {APP_STRINGS} from '~/common/constants/appStrings';
 
 type CartSummaryProps = {
   cart: OptimisticCart<CartApiQueryFragment | null>;
@@ -12,34 +14,43 @@ type CartSummaryProps = {
 };
 
 export function CartSummary({cart, layout}: CartSummaryProps) {
+  const location = useLocation();
   const className =
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
 
   return (
     <div
       aria-labelledby="cart-summary"
-      className={`flex flex-col gap-4 w-full px-6 bg-light-bg1 border-t border-t-light-bg2 h-[150px] ${layout !== 'page' ? "absolute bottom-20 justify-end" : ""}`}
+      className={`flex flex-col gap-2 w-full px-6 bg-light-bg1 border-t border-t-light-bg2 h-[170px] ${layout !== 'page' ? "absolute bottom-20 justify-end" : ""}`}
     >
-      <div className="flex justify-between items-center mb-2">
-        <div className={"font-title text-xl font-medium"}>Tổng cộng</div>
-        <div className={"text-lg font-medium"}>
+      <div className="mb-1 flex justify-between items-center">
+        <div className={"font-cute text-xl font-[600]"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].totalText}</div>
+        <div className={"text-xl font-[500]"}>
           {cart.cost?.subtotalAmount?.amount ? (
-            <div>{getFullPriceString(cart.cost?.subtotalAmount.amount, cart.cost?.subtotalAmount.currencyCode ?? "")}</div>
+            <div>{getFullPriceString(cart.cost?.subtotalAmount.amount, cart.cost?.subtotalAmount.currencyCode ?? "", getAvailableLocaleFromPathname(location.pathname))}</div>
           ) : (
             '-'
           )}
         </div>
       </div>
+      <div className="flex items-center gap-2">
+        <TicketPercent size={24} className={"text-light-text3"}/>
+        <div className={"text-sm text-light-text2 font-[500] tracking-tight truncate"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].discountText}</div>
+      </div>
       {/*<CartDiscounts discountCodes={cart.discountCodes} />*/}
       {/*<CartGiftCard giftCardCodes={cart.appliedGiftCards} />*/}
-      <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+      <div className={"mt-2"}>
+        <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+      </div>
+
     </div>
   );
 }
 
 function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
-  if (!checkoutUrl) return null;
+  const location = useLocation();
 
+  if (!checkoutUrl) return null;
   return (
     <div>
       <a href={checkoutUrl} target="_self">
@@ -54,7 +65,7 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl?: string}) {
           before:transition-transform before:duration-500 before:ease-in-out
           hover:before:translate-x-0
         `}>
-          <div className="relative z-10">THANH TOÁN</div>
+          <div className="relative z-10">{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].checkoutText}</div>
           <ArrowRight size={20} className="relative z-10"/>
         </div>
       </a>

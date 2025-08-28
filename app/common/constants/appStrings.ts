@@ -3,6 +3,18 @@ export const APP_STRINGS = {
     // General
     storeName: "Socutie",
 
+    // Cart
+    cartTitle: "GIỎ HÀNG",
+    removeText: "Xóa",
+    totalText: "Tạm Tính",
+    discountText: "Nhập Giftcode ở phần thanh toán",
+    checkoutText: "THANH TOÁN",
+    cartEmptyText: "Giỏ hàng đang trống",
+    exploreBestSellersText: "Khám phá ngay những sản phẩm hot nhất của Socutie tại đây",
+
+    // Search
+    searchTitle: "TÌM KIẾM",
+
     // Home page
     mostPick: "MOST PICK BY CUTIES",
     feedback: "CUTIES FEEDBACK",
@@ -23,7 +35,7 @@ export const APP_STRINGS = {
     quantityText: "Số lượng",
     isAvailableText: "Còn hàng",
     isUnavailableText: "Đã hết hàng",
-    skuText: "Mã SP",
+    shippingTimeText: "Giao ngay từ 1-6 ngày",
     addToCartText: "THÊM VÀO GIỎ HÀNG",
     contactUsText: "LIÊN HỆ CHÚNG MÌNH",
     loadingText: "ĐANG XỬ LÝ",
@@ -49,11 +61,30 @@ export const APP_STRINGS = {
     faqQuestion2: "Nếu sản phẩm mình muốn mua đã hết hàng thì sao?",
     faqAnswer2: "Đừng lo nha 💖 Hãy liên hệ cho Socutie qua nền tảng Instagram, bọn mình sẽ cập nhật cho khách hàng thông tin mới nhất về những đợt restock tiếp theo ✨",
     faqQuestion3: "Làm sao để nhận thông báo ưu đãi từ Socutie?",
-    faqAnswer3: "Khi thanh toán, khách hàng chỉ cần tick chọn đăng ký nhận ưu đãi qua email. Tụi mình sẽ gửi đến khách hàng những deal xinh xắn & tin mới nhất nhanh nhất luôn 💌"
+    faqAnswer3: "Khi thanh toán, khách hàng chỉ cần tick chọn đăng ký nhận ưu đãi qua email. Tụi mình sẽ gửi đến khách hàng những deal xinh xắn & tin mới nhất nhanh nhất luôn 💌",
+
+    // Collection page
+    productCountText: "sản phẩm",
+    sortLabelNewest: "Mới nhất",
+    sortLabelBestSelling: "Bán chạy nhất",
+    sortLabelLowestPrice: "Giá thấp nhất",
+    sortLabelHighestPrice: "Giá cao nhất",
   },
   "en-us": {
     // General
     storeName: "Socutie",
+
+    // Cart
+    cartTitle: "CART",
+    removeText: "Remove",
+    totalText: "Subtotal",
+    discountText: "Apply discount code at checkout",
+    checkoutText: "CHECKOUT",
+    cartEmptyText: "Your cart is empty",
+    exploreBestSellersText: "Discover Socutie’s hottest products right now",
+
+    // Search
+    searchTitle: "SEARCH",
 
     // Home page
     mostPick: "MOST PICK BY CUTIES",
@@ -75,7 +106,7 @@ export const APP_STRINGS = {
     quantityText: "Quantity",
     isAvailableText: "In stock",
     isUnavailableText: "Out of stock",
-    skuText: "SKU",
+    shippingTimeText: "Worldwide shipping",
     addToCartText: "ADD TO CART",
     contactUsText: "CONTACT US",
     loadingText: "PROCESSING",
@@ -101,6 +132,13 @@ export const APP_STRINGS = {
     faqQuestion2: "What if the product I want is out of stock?",
     faqAnswer2: "Don’t worry 💖 Just contact Socutie on Instagram, and we’ll update you with the latest information about upcoming restocks ✨",
     faqQuestion3: "How can I receive promotions from Socutie?",
-    faqAnswer3: "When checking out, simply tick the box to subscribe for email offers. We’ll send you the cutest deals & latest updates right away 💌"
+    faqAnswer3: "When checking out, simply tick the box to subscribe for email offers. We’ll send you the cutest deals & latest updates right away 💌",
+
+    // Collection page
+    productCountText: "products",
+    sortLabelNewest: "Newest",
+    sortLabelBestSelling: "Best selling",
+    sortLabelLowestPrice: "Lowest price",
+    sortLabelHighestPrice: "Highest price",
   }
 }

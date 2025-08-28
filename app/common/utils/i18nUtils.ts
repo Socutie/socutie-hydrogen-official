@@ -1,6 +1,6 @@
+export type AvailableLocale = "vi-vn" | "en-us";
 
-
-export function getAvailableLocaleFromPathname(pathname: string) {
+export function getAvailableLocaleFromPathname(pathname: string): AvailableLocale {
   const urlParts = pathname.split('/');
 
   const firstSegment = urlParts[1]?.toLowerCase();
@@ -18,7 +18,7 @@ export function getAvailableLocaleUrlPartFromPathname(pathname: string) {
   return firstSegment === 'en-us' ? '/en-us' : '';
 }
 
-export function cutLocalePartFromPathname(pathname: string) {
+export function cutAnyLocalePartFromPathname(pathname: string) {
   const urlParts = pathname.split('/');
   const possibleLocalesList = ['vi-vn', 'en-us', 'en'];
 

@@ -11,7 +11,7 @@ import {useState} from "react";
 import {Handbag, Plus, Search} from 'lucide-react';
 import convert from 'color-convert';
 import {ProductPrice} from '~/components/ProductPrice';
-import {cutLocalePartFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
+import {cutAnyLocalePartFromPathname, getAvailableLocaleUrlPartFromPathname} from '~/common/utils/i18nUtils';
 
 export function ProductItem({
   product,
@@ -24,7 +24,7 @@ export function ProductItem({
 
   const variantUrl = useVariantUrl(product.handle);
 
-  const targetUrl = getAvailableLocaleUrlPartFromPathname(location.pathname) + cutLocalePartFromPathname(variantUrl);
+  const targetUrl = getAvailableLocaleUrlPartFromPathname(location.pathname) + cutAnyLocalePartFromPathname(variantUrl);
 
   const imgUrlsList = product.images.nodes.map(image => image.url);
   const emptyImgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";

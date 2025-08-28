@@ -1,10 +1,12 @@
 import {useOptimisticCart} from '@shopify/hydrogen';
-import {Link} from 'react-router';
+import {Link, useLocation} from 'react-router';
 import type {CartApiQueryFragment} from '../../../storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import {CartLineItem} from '~/components/cart/CartLineItem';
 import {CartSummary} from '~/components/cart/CartSummary';
 import {ArrowRight, ShoppingBag, ShoppingCart} from 'lucide-react';
+import {APP_STRINGS} from '~/common/constants/appStrings';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 export type CartLayout = 'page' | 'aside';
 
@@ -30,9 +32,9 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
 
   return (
     <div className={"relative h-full w-full"}>
-      <div className={`flex flex-col px-6 h-[calc(100vh-230px)]`}>
+      <div className={`flex flex-col px-6 h-[calc(100vh-250px)]`}>
         <CartEmpty hidden={linesCount !== 0} layout={layout} />
-        <div aria-labelledby="cart-lines" className="max-h-[calc(100vh-230px)] overflow-y-auto scrollbar-hidden">
+        <div aria-labelledby="cart-lines" className="max-h-[calc(100vh-250px)] overflow-y-auto scrollbar-hidden">
           <ul>
             {(cart?.lines?.nodes ?? []).map((line) => (
               <CartLineItem key={line.id} line={line} layout={layout} />
@@ -56,6 +58,8 @@ function CartEmpty({
   hidden: boolean;
   layout?: CartMainProps['layout'];
 }) {
+  const location = useLocation();
+
   const {close} = useAside();
   return (
     <div className={"h-full"} hidden={hidden}>
@@ -63,8 +67,8 @@ function CartEmpty({
       <div className={"rounded-full bg-light-bg3 p-5"}>
         <ShoppingBag size={32} strokeWidth={1.75}/>
       </div>
-      <div className={"text-2xl text-center font-[600] font-cute"}>Giỏ hàng đang trống</div>
-      <div className={"font-main tracking-tight text-base text-light-text2 text-center max-w-[350px]"}>Khám phá ngay những sản phẩm hot nhất của SoCutie tại đây</div>
+      <div className={"text-2xl text-center font-[600] font-cute"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].cartEmptyText}</div>
+      <div className={"font-main tracking-tight text-base text-light-text2 text-center max-w-[350px]"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].exploreBestSellersText}</div>
       <Link className={`
          relative overflow-hidden flex gap-2 justify-center items-center
           text-sm font-[600] rounded-[4px] text-light-bg1 font-main

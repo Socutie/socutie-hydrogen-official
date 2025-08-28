@@ -14,7 +14,7 @@ import {useAside} from '~/components/Aside';
 import {Globe, Menu, Search, ShoppingCart, UserRound} from 'lucide-react';
 import {I18nLocale} from '~/lib/i18n';
 import {
-  cutLocalePartFromPathname,
+  cutAnyLocalePartFromPathname,
   getAvailableLocaleFromPathname,
   getAvailableLocaleUrlPartFromPathname
 } from "~/common/utils/i18nUtils";
@@ -158,7 +158,7 @@ export function Header({
 
 export function ChangeLocaleCta({pathname}: {pathname: string}) {
   const targetLocale = getAvailableLocaleFromPathname(pathname) === "vi-vn" ? "/en-us" : "";
-  const cutLocalePathname = cutLocalePartFromPathname(pathname);
+  const cutLocalePathname = cutAnyLocalePartFromPathname(pathname);
   return (
     <a href={`${targetLocale}${cutLocalePathname}`} className="relative inline-block group">
       {/* Globe icon */}
@@ -491,7 +491,7 @@ function getRealUrlFromMenuUrl(
   primaryDomainUrl: string,
 ): string {
 
-  const cutLocalePathname = cutLocalePartFromPathname(new URL(menuUrl).pathname);
+  const cutLocalePathname = cutAnyLocalePartFromPathname(new URL(menuUrl).pathname);
 
   return menuUrl.includes('myshopify.com') ||
   menuUrl.includes(publicStoreDomain) ||
