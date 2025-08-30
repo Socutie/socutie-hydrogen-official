@@ -34,7 +34,7 @@ import {APP_STRINGS} from '~/common/constants/appStrings';
 import {motion} from 'framer-motion';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'Socutie | Home'}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {

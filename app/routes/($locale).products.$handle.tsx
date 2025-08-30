@@ -24,7 +24,7 @@ import {getAvailableLocaleFromPathname} from "~/common/utils/i18nUtils";
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [
-    {title: `Hydrogen | ${data?.product.title ?? ''}`},
+    {title: `Socutie | ${data?.product.title ?? ''}`},
     {
       rel: 'canonical',
       href: `/products/${data?.product.handle}`,

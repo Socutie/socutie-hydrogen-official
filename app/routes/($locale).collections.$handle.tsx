@@ -16,7 +16,7 @@ import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 const PRODUCTS_PER_PAGE = 30;
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
+  return [{title: `Socutie | ${data?.collection.title ?? ''} Collection`}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {
