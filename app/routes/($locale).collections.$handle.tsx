@@ -5,7 +5,7 @@ import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 import {ProductItem} from '~/components/ProductItem';
 import {COLLECTION_WITH_PRODUCTS_QUERY} from "~/custom-queries/customQueries";
-import {HeroBanner} from '~/components/home/HeroBanner';
+import {BannerSection} from '~/components/home/BannerSection';
 import {ProductCollectionSortKeys} from '@shopify/hydrogen/storefront-api-types';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {ChevronDown} from 'lucide-react';
@@ -101,10 +101,15 @@ export default function Collection() {
     <div className="w-full flex flex-col items-center">
       {/* Title/Banner */}
       <div className={"w-full"}>
-        {imgUrl ? (<HeroBanner aspectClass={"aspect-[3/4] lg:aspect-[21/9]"} src={imgUrl.url}></HeroBanner>) : (<HeroBanner aspectClass={"aspect-[3/4] lg:aspect-[21/9]"}></HeroBanner>)}
-
+        <BannerSection
+          aspectClass={"aspect-[3/4] lg:aspect-[21/9]"}
+          src={imgUrl ? imgUrl.url : '/images/collection-banner.jpg'}
+          overlayClass={'bg-black/20'}
+          hasLink={false}
+        />
       </div>
 
+      {/* Title */}
       <div className={"px-6 lg:px-20 py-16 w-full flex flex-col items-center justify-center"}>
         <div className={"text-2xl lg:text-3xl font-[500] text-center"}>
           {collection.title.toUpperCase()}

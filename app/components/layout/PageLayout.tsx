@@ -65,7 +65,7 @@ export function PageLayout({
 function FloatingChangeLocaleButton() {
   return (
     <div
-      className="fixed bottom-6 right-6 bg-light-secondary text-light-bg1 py-2 px-3 rounded-full drop-shadow-md z-50"
+      className="fixed bottom-6 right-6 bg-light-secondary text-light-bg1 py-2 px-3 rounded-full shadow-md z-50"
     >
       <SwitchLocaleCta/>
     </div>

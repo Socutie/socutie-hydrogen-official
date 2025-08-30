@@ -116,7 +116,7 @@ export function Header({
           >
             <HeaderMenuMobileToggle />
             <div className={'hidden sm:flex items-center'}>
-              <SwitchLocaleCta/>
+              <SwitchLocaleCta useOnHeader={true}/>
             </div>
             <div className={"flex sm:hidden items-center"}>
               <SearchToggle />
@@ -259,7 +259,7 @@ export function Logo({
   );
 }
 
-export function SwitchLocaleCta() {
+export function SwitchLocaleCta({useOnHeader = false}) {
   const location = useLocation();
 
   const currentLocale = getAvailableLocaleFromPathname(location.pathname);
@@ -270,28 +270,34 @@ export function SwitchLocaleCta() {
   const iconSize = 22;
   return (
     <a
-      className={'flex flex-row items-center gap-2'}
+      className={'flex flex-row items-center gap-2 group'}
       href={`${targetLocaleUrlPart}${cutLocalePathname}`}
     >
       <Image
-        src={`${currentLocale === "vi-vn" ? "/images/vietnam.png" : "/images/united-states.png"}`}
-        alt="hero-banner"
+        src={`${currentLocale === 'vi-vn' ? '/images/vietnam.png' : '/images/united-states.png'}`}
+        alt="locale"
         width={iconSize}
         height={iconSize}
         className="object-contain"
       />
       <div className={` flex flex-row items-center font-[600] text-xs`}>
-        {`${currentLocale === "vi-vn" ? "VND" : "USD"}`}
+        {`${currentLocale === 'vi-vn' ? 'VND' : 'USD'}`}
       </div>
-      <Repeat size={13} strokeWidth={2.25} />
-
-      {/*<Image*/}
-      {/*  src="/images/united-states.png"*/}
-      {/*  alt="hero-banner"*/}
-      {/*  width={iconSize}*/}
-      {/*  height={iconSize}*/}
-      {/*  className="object-contain"*/}
-      {/*/>*/}
+      <Repeat
+        size={13}
+        strokeWidth={2.25}
+        className={`${useOnHeader ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'} transition-all duration-300 ease-in-out`}
+      />
+      <Image
+        src={`${currentLocale === 'vi-vn' ? '/images/united-states.png' : '/images/vietnam.png'}`}
+        alt="locale"
+        width={iconSize}
+        height={iconSize}
+        className={`object-contain ${useOnHeader ? 'opacity-0 group-hover:opacity-100' : 'hidden'} transition-all duration-300 ease-in-out`}
+      />
+      <div className={` flex flex-row items-center font-[600] text-xs ${useOnHeader ? 'opacity-0 group-hover:opacity-100' : 'hidden'} transition-all duration-300 ease-in-out`}>
+        {`${currentLocale === 'vi-vn' ? 'USD' : 'VND'}`}
+      </div>
     </a>
   );
 }
