@@ -16,7 +16,7 @@ import {
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 import {I18nLocale} from '~/lib/i18n';
 import {APP_STRINGS} from '~/common/constants/appStrings';
-import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {cutAnyLocalePartFromPathname, getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 interface PageLayoutProps {
   cart: Promise<CartApiQueryFragment | null>;
@@ -52,7 +52,7 @@ export function PageLayout({
           i18n={i18n}
         />
       )}
-      <main className={`${location.pathname === '/' ? '' : 'mb-32'}`}>{children}</main>
+      <main className={`${cutAnyLocalePartFromPathname(location.pathname) === '/' ? '' : 'mb-32'}`}>{children}</main>
       <Footer
         footer={footer}
         header={header}

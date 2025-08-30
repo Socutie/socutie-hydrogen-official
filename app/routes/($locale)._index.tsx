@@ -200,13 +200,13 @@ export default function Homepage() {
       {/* Featured Collection section */}
       <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
         <div className={`max-w-screen-xl w-full bg-light-main4`}>
-          <div className={`grid grid-cols-1 lg:grid-cols-2`}>
+          <div className={`grid grid-cols-1 lg:grid-cols-2 lg:gap-8`}>
             <motion.div
               className={"flex justify-center items-center py-16 px-6 sm:px-16"}
-              initial={{rotate: 3, opacity: 0}}
+              initial={{rotate: 10, opacity: 0}}
               whileInView={{rotate: -3, opacity: 1}}
-              transition={{duration: 0.5, ease: 'easeOut'}}
-              viewport={{once: true, amount: 0.5}}
+              transition={{duration: 0.75, ease: 'easeOut'}}
+              viewport={{once: true, amount: 0.3}}
             >
               <Image
               src={'/images/collection-banner.jpg'}
@@ -216,8 +216,8 @@ export default function Homepage() {
               sizes="(min-width: 1024px) 25vw, 50vw"
               />
             </motion.div>
-            <FadeInDiv>
-              <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 lg:pl-16`}>
+            <FadeInDiv viewportAmount={0.4}>
+              <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 `}>
                 <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>
                 <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>
                 <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>

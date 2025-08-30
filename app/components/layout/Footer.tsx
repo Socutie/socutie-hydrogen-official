@@ -54,8 +54,8 @@ export function Footer({
                   <FadeInItem viewportAmount={0.1}>
                     <div className={'flex flex-col gap-1'}>
                       <Logo
-                        width={80}
-                        height={80}
+                        width={84}
+                        height={84}
                         pathname={location.pathname}
                       ></Logo>
                       <div className={'text-sm tracking-tight'}>

@@ -235,18 +235,20 @@ export function Header({
 }
 
 export function Logo({
-  width = 62,
-  height = 62,
+  width = 64,
+  height = 64,
   pathname,
 }: {
   width?: number;
   height?: number;
   pathname: string;
 }) {
+  const sizeClassName = `w-[${width}px] h-[${height}px]`
+
   return (
     <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}/`}>
       {/*<div className={`font-fancy font-medium text-[40px] ${className}`}>SoCutie</div>*/}
-
+      {/* src="/images/logo.png" */}
       <Image
         src="/images/logo.png"
         alt="hero-banner"
@@ -254,6 +256,12 @@ export function Logo({
         height={height}
         className="object-contain"
       />
+      {/*<img*/}
+      {/*  src="/svg/logo.svg"*/}
+      {/*  alt="Logo"*/}
+      {/*  height={height}*/}
+      {/*  width={width}*/}
+      {/*/>*/}
     </a>
   );
 }
@@ -498,10 +506,10 @@ function HeaderCtas({
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             <Image
-              src="/images/bow6.png"
-              alt="hero-banner"
-              width={28}
-              height={28}
+              src="/svg/bow.svg"
+              alt="bow"
+              width={30}
+              height={30}
               className="object-contain"
             />
           </Await>
