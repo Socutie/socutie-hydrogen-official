@@ -72,7 +72,7 @@ export function BannerSection({
           New Arrival
         </div>
         <div className="font-[600] text-center text-light-bg1 text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8">
-          {`${collection ? collection.title : "Socutie Special Collection"}`}
+          {`${collection ? collection.title.toUpperCase() : "Socutie Special Collection"}`}
         </div>
         <Link
           className={`
