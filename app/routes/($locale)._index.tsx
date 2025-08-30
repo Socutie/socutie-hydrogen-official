@@ -31,6 +31,7 @@ import {
   getAvailableLocaleUrlPartFromPathname,
 } from '~/common/utils/i18nUtils';
 import {APP_STRINGS} from '~/common/constants/appStrings';
+import {motion} from 'framer-motion';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -200,28 +201,36 @@ export default function Homepage() {
       <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
         <div className={`max-w-screen-xl w-full bg-light-main4`}>
           <div className={`grid grid-cols-1 lg:grid-cols-2`}>
-            <div className={"flex justify-center items-center p-16"}>
+            <motion.div
+              className={"flex justify-center items-center py-16 px-6 sm:px-16"}
+              initial={{rotate: 3, opacity: 0}}
+              whileInView={{rotate: -3, opacity: 1}}
+              transition={{duration: 0.5, ease: 'easeOut'}}
+              viewport={{once: true, amount: 0.5}}
+            >
               <Image
               src={'/images/collection-banner.jpg'}
               alt={'collection-image'}
-              className={`w-full -rotate-3 aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
-              loading={"lazy"}
-              sizes="(min-width: 1024px) 25vw, 50vw"/>
-            </div>
-            <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 lg:pl-16`}>
-              <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>
-              <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>
-              <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>
-              <div className="mt-6 grid gap-6 lg:gap-10 grid-cols-2">
-                {featuredCollection?.products.nodes.slice(0, 2).map((product) => (
-                  <FadeInItem key={product.id}>
-                    <ProductItem  product={product} />
-                  </FadeInItem>
-                ))}
-              </div>
-              <div className={`flex justify-center items-center mt-4`}>
-                <Link
-                  className={`
+              className={`w-full aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
+              loading={"eager"}
+              sizes="(min-width: 1024px) 25vw, 50vw"
+              />
+            </motion.div>
+            <FadeInDiv>
+              <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 lg:pl-16`}>
+                <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>
+                <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>
+                <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>
+                <div className="mt-6 grid gap-6 lg:gap-10 grid-cols-2">
+                  {featuredCollection?.products.nodes.slice(0, 2).map((product) => (
+                    <FadeInItem key={product.id}>
+                      <ProductItem  product={product} />
+                    </FadeInItem>
+                  ))}
+                </div>
+                <div className={`flex justify-center items-center mt-4`}>
+                  <Link
+                    className={`
                relative overflow-hidden
                px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]
                text-sm font-[600] font-main text-light-bg1
@@ -233,16 +242,18 @@ export default function Homepage() {
                before:transition-transform before:duration-500 before:ease-in-out
                hover:before:translate-x-0
             `}
-                  to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/${featuredCollection?.handle}`}
-                >
-                  <div
-                    className={'relative z-10 flex gap-3 items-center justify-center'}
+                    to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/${featuredCollection?.handle}`}
                   >
-                    <div className={''}>VIEW ALL</div>
-                  </div>
-                </Link>
+                    <div
+                      className={'relative z-10 flex gap-3 items-center justify-center'}
+                    >
+                      <div className={''}>VIEW ALL</div>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </FadeInDiv>
+
           </div>
         </div>
       </div>
