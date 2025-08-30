@@ -72,7 +72,7 @@ export function ProductImage({
           slidesPerView={1}
           grabCursor={false}
           speed={300}
-          touchRatio={2}
+          touchRatio={1}
           touchAngle={30}
           className={'relative w-full aspect-[3/4] h-auto group'}
           onSwiper={(swiper) => (swiperRef.current = swiper)}

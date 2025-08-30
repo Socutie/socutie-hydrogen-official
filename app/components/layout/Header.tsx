@@ -12,9 +12,10 @@ import type {
 } from '../../../storefrontapi.generated';
 import {useAside} from '~/components/Aside';
 import {
+  ArrowRightLeft,
   ChevronDown,
   Globe,
-  Menu,
+  Menu, Repeat,
   Search,
   ShoppingCart,
   UserRound,
@@ -109,20 +110,25 @@ export function Header({
         <div
           className={'flex items-center justify-between w-full max-w-screen-xl'}
         >
+          {/* Left side */}
           <div
-            className={'w-[40%] flex justify-start items-center gap-4 md:gap-6'}
+            className={'w-[40%] flex justify-start items-center gap-4 sm:gap-6'}
           >
             <HeaderMenuMobileToggle />
-            <div className={'flex items-center'}>
-              <ChangeLocaleCta pathname={location.pathname} />
+            <div className={'hidden sm:flex items-center'}>
+              <SwitchLocaleCta/>
             </div>
-            {/*<div className={"flex md:hidden items-center"}>*/}
-            {/*  <SearchToggle />*/}
-            {/*</div>*/}
+            <div className={"flex sm:hidden items-center"}>
+              <SearchToggle />
+            </div>
           </div>
+
+          {/* Center */}
           <div className={'w-[20%] flex justify-center items-center'}>
             <Logo pathname={location.pathname} />
           </div>
+
+          {/* Right side */}
           <div className={'w-[40%] flex justify-end items-center'}>
             <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
           </div>
@@ -175,13 +181,13 @@ export function Header({
                   <div className={`
                     absolute top-12 left-0 z-10 h-[2px] bg-light-main 
                     opacity-0 transition-all duration-500 ease-in-out
-                    w-0 group-hover:w-[180px] group-hover:opacity-100
+                    w-0 md:group-hover:w-[180px] md:group-hover:opacity-100
                   `}/>
                 )}
                 {hasDropdown && (
                   <div
                     className={`
-                    opacity-0 pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 
+                    opacity-0 pointer-events-none md:group-hover:pointer-events-auto md:group-hover:opacity-100 
                     absolute transition-all duration-300 ease-in-out top-12 bg-light-main3
                     rounded-b-[4px] shadow-md
                     flex flex-col justify-start items-start w-[180px] py-6 px-6 gap-4
@@ -229,29 +235,6 @@ export function Header({
   );
 }
 
-export function ChangeLocaleCta({pathname}: {pathname: string}) {
-  const targetLocale =
-    getAvailableLocaleFromPathname(pathname) === 'vi-vn' ? '/en-us' : '';
-  const cutLocalePathname = cutAnyLocalePartFromPathname(pathname);
-  return (
-    <a
-      href={`${targetLocale}${cutLocalePathname}`}
-      className="relative inline-block group"
-    >
-      {/* Globe icon */}
-      <Globe
-        strokeWidth={1.75}
-        className="transition-colors duration-200 group-hover:text-light-main"
-      />
-
-      {/* Locale label */}
-      <div className="absolute -top-[4px] -right-[4px] w-5 h-3 flex items-center justify-center text-[10px] font-bold bg-light-bg1 text-light-text1 rounded transition-colors duration-200 group-hover:text-light-main">
-        {targetLocale === '' ? 'VN' : 'EN'}
-      </div>
-    </a>
-  );
-}
-
 export function Logo({
   width = 62,
   height = 62,
@@ -276,37 +259,42 @@ export function Logo({
   );
 }
 
-const CUSTOM_MENU = {
-  items: [
-    {
-      id: 'all_products',
-      resourceId: null,
-      tags: [],
-      title: 'SẢN PHẨM',
-      type: 'HTTP',
-      url: '/collections/all',
-      items: [],
-    },
-    {
-      id: 'all_collections',
-      resourceId: null,
-      tags: [],
-      title: 'BỘ SƯU TẬP',
-      type: 'HTTP',
-      url: '/collections',
-      items: [],
-    },
-    {
-      id: 'about',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
-      title: 'GIỚI THIỆU',
-      type: 'PAGE',
-      url: '/pages/about',
-      items: [],
-    },
-  ],
-};
+export function SwitchLocaleCta() {
+  const location = useLocation();
+
+  const currentLocale = getAvailableLocaleFromPathname(location.pathname);
+
+  const targetLocaleUrlPart = currentLocale === 'vi-vn' ? '/en-us' : '';
+  const cutLocalePathname = cutAnyLocalePartFromPathname(location.pathname);
+
+  const iconSize = 22;
+  return (
+    <a
+      className={'flex flex-row items-center gap-2'}
+      href={`${targetLocaleUrlPart}${cutLocalePathname}`}
+    >
+      <Image
+        src={`${currentLocale === "vi-vn" ? "/images/vietnam.png" : "/images/united-states.png"}`}
+        alt="hero-banner"
+        width={iconSize}
+        height={iconSize}
+        className="object-contain"
+      />
+      <div className={` flex flex-row items-center font-[600] text-xs`}>
+        {`${currentLocale === "vi-vn" ? "VND" : "USD"}`}
+      </div>
+      <Repeat size={13} strokeWidth={2.25} />
+
+      {/*<Image*/}
+      {/*  src="/images/united-states.png"*/}
+      {/*  alt="hero-banner"*/}
+      {/*  width={iconSize}*/}
+      {/*  height={iconSize}*/}
+      {/*  className="object-contain"*/}
+      {/*/>*/}
+    </a>
+  );
+}
 
 // export function HeaderMenu({
 //   menu,
@@ -486,37 +474,8 @@ function HeaderCtas({
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
-    <nav className="flex gap-3 md:gap-6" role="navigation">
-      {/*<a*/}
-      {/*  className={"hidden md:flex"}*/}
-      {/*  href={"https://www.instagram.com/socutie.sg"}*/}
-      {/*  target="_blank"*/}
-      {/*  rel="noopener noreferrer"*/}
-      {/*>*/}
-      {/*  <Image*/}
-      {/*    src="/images/tie-icon.png"*/}
-      {/*    alt="hero-banner"*/}
-      {/*    width={26}*/}
-      {/*    height={26}*/}
-      {/*    className="object-contain"*/}
-      {/*  />*/}
-      {/*</a>*/}
-
-      {/*<a*/}
-      {/*  className={"hidden md:flex"}*/}
-      {/*  href={"https://www.instagram.com/socutie.sg"}*/}
-      {/*  target="_blank"*/}
-      {/*  rel="noopener noreferrer"*/}
-      {/*>*/}
-      {/*  <div className="relative group">*/}
-      {/*    <Instagram className="transition-colors duration-150 ease-in-out hover:text-light-main" />*/}
-      {/*    <span*/}
-      {/*      className="absolute left-0 -bottom-1 h-[1px] w-full origin-left scale-x-0 bg-light-main transition-transform duration-300 ease-in-out group-hover:scale-x-100"*/}
-      {/*    ></span>*/}
-      {/*  </div>*/}
-      {/*</a>*/}
-
-      {/*<NavLink className={"hidden md:flex"} prefetch="intent" to="/account" style={activeLinkStyle}>*/}
+    <nav className="flex gap-4 sm:gap-6" role="navigation">
+      {/*<NavLink className={"hidden sm:flex"} prefetch="intent" to="/account" style={activeLinkStyle}>*/}
       {/*  <Suspense fallback="Sign in">*/}
       {/*    <Await resolve={isLoggedIn} errorElement="Sign in">*/}
       {/*      <UserRound className={"transition-colors duration-200 hover:text-light-main"}/>*/}
@@ -544,7 +503,7 @@ function HeaderCtas({
         </Suspense>
       </a>
 
-      <div className={'flex items-center'}>
+      <div className={'hidden sm:flex items-center'}>
         <SearchToggle />
       </div>
 
@@ -557,9 +516,7 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button onClick={() => open('mobile')}>
-      <Menu
-        className={'transition-colors duration-200 hover:text-light-main'}
-      />
+      <Menu/>
     </button>
   );
 }
@@ -569,7 +526,7 @@ function SearchToggle() {
   return (
     <button className="" onClick={() => open('search')}>
       <div className="relative group">
-        <Search className="transition-colors duration-150 ease-in-out hover:text-light-main" />
+        <Search strokeWidth={1.75} />
       </div>
     </button>
   );
@@ -595,7 +552,14 @@ function CartBadge({count}: {count: number | null}) {
     >
       <div className={'relative'}>
         <div className="relative group">
-          <ShoppingCart className="transition-colors duration-150 ease-in-out hover:text-light-main" />
+          <Image
+            src={"/images/bag.png"}
+            alt="cart"
+            width={24}
+            height={24}
+            className="object-contain"
+          />
+          {/*<ShoppingCart className="transition-colors duration-150 ease-in-out hover:text-light-main" />*/}
         </div>
         {count === null ? (
           <span>&nbsp;</span>

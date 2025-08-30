@@ -22,17 +22,26 @@ export function HeroBanner({
   return (
     <div className="relative">
       <motion.div
-        className={'w-full'}
-        initial={{opacity: 0, y: -40}}
-        whileInView={{opacity: 1, y: 0}}
-        transition={{duration: 0.5, ease: 'easeOut'}}
+        className="w-full overflow-hidden" // ensures no layout shift
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true }}
       >
-        <Image
-          src={src}
-          alt="hero-banner"
-          className={`w-full h-auto object-cover ${aspectClass}`}
-          sizes="100vw"
-        />
+        <motion.div
+          initial={{ scale: 1.1 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <Image
+            src={src}
+            alt="hero-banner"
+            className={`w-full h-auto object-cover ${aspectClass}`}
+            sizes="100vw"
+            loading={"eager"}
+          />
+        </motion.div>
       </motion.div>
 
       {/* Black overlay */}
@@ -41,9 +50,10 @@ export function HeroBanner({
       {/* Optional content */}
       <motion.div
         className={`${showSectionContent ? "" : "hidden"} absolute inset-0 flex flex-col items-center justify-center`}
-        initial={{opacity: 0, y: -40}}
+        initial={{opacity: 0, y: -20}}
         whileInView={{opacity: 1, y: 0}}
         transition={{duration: 0.5, ease: 'easeOut'}}
+        viewport={{ once: true }}
       >
         <div className="font-fancy text-center text-light-bg1 text-2xl sm:text-3xl md:text-4xl mb-2 md:mb-4 mt-[40%] md:mt-[20%]">
           New Arrival

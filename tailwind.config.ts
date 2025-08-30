@@ -18,7 +18,7 @@ const config: Config = {
           main2: "#ec8398", //f7a1b2 ff99c0 f7a1bf f58aaa f688a4 f995a4 f38c9b f28ca1 ec8398
           main3: "#FFDCDC", //FFDCDC
           main4: "#FFF2EB",
-          secondary: "#f5efbc", //09aa89 09aa97 f10e5d f2267f f5efbc
+          secondary: "#398e7d", //09aa89 09aa97 f10e5d f2267f f5efbc
           text1: "#000000",
           text2: "#333333", //333333
           text3: "#666666",

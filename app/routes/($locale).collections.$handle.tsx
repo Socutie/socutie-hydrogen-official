@@ -131,7 +131,7 @@ export default function Collection() {
 
       {/* Product list */}
       <div key={location.search} className={"w-full flex justify-center px-6 lg:px-20"}>
-        <FadeInStagger>
+        <FadeInStagger viewportAmount={0.05}>
           <PaginatedResourceSection
             connection={collection.products}
             resourcesClassName="max-w-screen-xl w-full grid mb-8 gap-6 lg:gap-10 grid-cols-2 lg:grid-cols-4"

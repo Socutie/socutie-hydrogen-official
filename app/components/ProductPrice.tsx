@@ -30,7 +30,7 @@ export function ProductPrice({
     return (
       <div className={`flex ${size === "normal" ? "gap-3" : "gap-1"} items-center`}>
         <div className={`${size === "normal" ? "text-xl" : "text-sm lg:text-base"} font-[600] text-light-main`}>{getFullPriceString(price.amount, price.currencyCode, getAvailableLocaleFromPathname(location.pathname))}</div>
-        <div className={`text-sm font-normal text-light-text2 line-through decoration-light-text2`}>{getFullPriceString(price.amount, price.currencyCode, getAvailableLocaleFromPathname(location.pathname))}</div>
+        <div className={`text-sm font-normal text-light-text2 line-through decoration-light-text2`}>{getFullPriceString(compareAtPrice!.amount, compareAtPrice!.currencyCode, getAvailableLocaleFromPathname(location.pathname))}</div>
       </div>
     )
   }

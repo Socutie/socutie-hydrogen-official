@@ -78,14 +78,20 @@ export function ProductItem({
 
           {/* Sold out badge on top */}
           {!product.availableForSale && (
-            <div className={`z-30 py-[2px] px-[6px] absolute top-2 left-2 flex justify-center font-main items-center bg-light-main text-xs text-light-bg1`}>
+            <div className={`
+              z-30 rounded-full py-[3px] px-[9px] absolute top-2 left-2 flex justify-center items-center
+              bg-light-main text-[11px] text-light-bg1 font-[600]
+            `}>
               <div>{"SOLD OUT"}</div>
             </div>
           )}
 
           {/* Sales off badge on top */}
           {(product.availableForSale && product.priceRange.minVariantPrice.amount < product.compareAtPriceRange.maxVariantPrice.amount) && (
-            <div className={`z-30 py-[2px] px-[6px] absolute top-2 left-2 flex justify-center font-main items-center bg-light-main text-xs text-light-bg1`}>
+            <div className={`
+              z-30 rounded-full py-[3px] px-[9px] absolute top-2 left-2 flex justify-center items-center
+              bg-light-main text-[11px] text-light-bg1 font-[600]
+            `}>
               <div>{(`${discountPercentage(product.priceRange.minVariantPrice.amount, product.compareAtPriceRange.maxVariantPrice.amount)} OFF`)}</div>
             </div>
           )}
