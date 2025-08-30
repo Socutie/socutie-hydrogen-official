@@ -100,24 +100,41 @@ export default function Collection() {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Title/Banner */}
-      <div className={"w-full"}>
+      <div className={"w-full relative"}>
         <BannerSection
           aspectClass={"aspect-[3/4] lg:aspect-[21/9]"}
           src={imgUrl ? imgUrl.url : '/images/collection-banner.jpg'}
-          overlayClass={'bg-black/20'}
+          overlayClass={'bg-black/30'}
           hasLink={false}
         />
+        <div
+          className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}
+        >
+          <div
+            className={`flex flex-col items-center gap-6  text-light-bg1 max-w-screen-xl pt-32`}
+          >
+            <div className={`font-fancy text-3xl text-center`}>
+              Socutie Collection
+            </div>
+            <div className={`text-3xl font-[500] text-center`}>
+              {collection.title.toUpperCase()}
+            </div>
+            <div className={`text-sm font-[400] tracking-tight text-center`}>
+              {collection.description}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Title */}
-      <div className={"px-6 lg:px-20 py-16 w-full flex flex-col items-center justify-center"}>
-        <div className={"text-2xl lg:text-3xl font-[500] text-center"}>
-          {collection.title.toUpperCase()}
-        </div>
-        {/*<div className={"mt-4 text-sm text-center tracking-tight max-w-[500px]"}>*/}
-        {/*  {collection.description}*/}
-        {/*</div>*/}
-      </div>
+      {/*/!* Title *!/*/}
+      {/*<div className={"px-6 lg:px-20 py-16 w-full flex flex-col items-center justify-center"}>*/}
+      {/*  <div className={"text-2xl lg:text-3xl font-[500] text-center"}>*/}
+      {/*    {collection.title.toUpperCase()}*/}
+      {/*  </div>*/}
+      {/*  /!*<div className={"mt-4 text-sm text-center tracking-tight max-w-[500px]"}>*!/*/}
+      {/*  /!*  {collection.description}*!/*/}
+      {/*  /!*</div>*!/*/}
+      {/*</div>*/}
       {/*<h1>{collection.title}</h1>*/}
       {/*<p className="collection-description">{collection.description}</p>*/}
 

@@ -113,6 +113,7 @@ export default function Homepage() {
       {/* Hero Banner */}
       <div className={'w-full'}>
         <BannerSection
+          src={featuredCollection?.image ? featuredCollection?.image.url : '/images/hero-banner.jpg'}
           collection={featuredCollection}
           showSectionContent={true}
         />
@@ -196,97 +197,27 @@ export default function Homepage() {
       <div className={'h-32'}></div>
 
       {/* Featured Collection section */}
-      {/*<div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>*/}
-      {/*  <div className={`max-w-screen-xl w-full bg-light-main4`}>*/}
-      {/*    <div className={`grid grid-cols-1 lg:grid-cols-2`}>*/}
-      {/*      <div className={"flex justify-center items-center p-16"}>*/}
-      {/*        <Image*/}
-      {/*        src={'/images/collection-banner.jpg'}*/}
-      {/*        alt={'collection-image'}*/}
-      {/*        className={`w-full -rotate-3 aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}*/}
-      {/*        loading={"lazy"}*/}
-      {/*        sizes="(min-width: 1024px) 25vw, 50vw"/>*/}
-      {/*      </div>*/}
-      {/*      <div className={`flex flex-col items-center gap-6 py-10 px-6 lg:pl-16`}>*/}
-      {/*        <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>*/}
-      {/*        <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>*/}
-      {/*        <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>*/}
-      {/*        <div className="mt-6 grid gap-6 lg:gap-10 grid-cols-2">*/}
-      {/*          {featuredCollection?.products.nodes.slice(0, 2).map((product) => (*/}
-      {/*            <FadeInItem key={product.id}>*/}
-      {/*              <ProductItem  product={product} />*/}
-      {/*            </FadeInItem>*/}
-      {/*          ))}*/}
-      {/*        </div>*/}
-      {/*        <div className={`flex justify-center items-center mt-4`}>*/}
-      {/*          <Link*/}
-      {/*            className={`*/}
-      {/*         relative overflow-hidden*/}
-      {/*         px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]*/}
-      {/*         text-sm font-[600] font-main text-light-bg1*/}
-      {/*         bg-light-main border-2 border-light-main*/}
-      {/*         transition-all duration-300 ease-in-out*/}
-      {/*         hover:text-light-main*/}
-      {/*         before:absolute before:inset-0*/}
-      {/*         before:bg-light-bg1 before:translate-x-[-110%]*/}
-      {/*         before:transition-transform before:duration-500 before:ease-in-out*/}
-      {/*         hover:before:translate-x-0*/}
-      {/*      `}*/}
-      {/*            to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/${featuredCollection?.handle}`}*/}
-      {/*          >*/}
-      {/*            <div*/}
-      {/*              className={'relative z-10 flex gap-3 items-center justify-center'}*/}
-      {/*            >*/}
-      {/*              <div className={''}>VIEW ALL</div>*/}
-      {/*            </div>*/}
-      {/*          </Link>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
-      {/* Featured Collection section 2 */}
-      <div
-        className={`w-full flex flex-col justify-center items-center bg-light-main4 `}
-      >
-        <div className={'relative w-full'}>
-          <BannerSection
-            aspectClass={'aspect-[1/1] lg:aspect-[6/1]'}
-            overlayClass={'bg-black/30'}
-            src={'/images/collection-banner.jpg'}
-            collection={featuredCollection}
-          />
-          <div
-            className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}
-          >
-            <div
-              className={`flex flex-col items-center gap-6  text-light-bg1 max-w-screen-xl`}
-            >
-              <div className={`font-fancy text-3xl text-center`}>
-                New Arrivals
-              </div>
-              <div className={`text-3xl font-[500] text-center`}>
-                {featuredCollection?.title.toUpperCase()}
-              </div>
-              <div className={`text-sm font-[400] tracking-tight text-center`}>
-                {featuredCollection?.description}
-              </div>
+      <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
+        <div className={`max-w-screen-xl w-full bg-light-main4`}>
+          <div className={`grid grid-cols-1 lg:grid-cols-2`}>
+            <div className={"flex justify-center items-center p-16"}>
+              <Image
+              src={'/images/collection-banner.jpg'}
+              alt={'collection-image'}
+              className={`w-full -rotate-3 aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
+              loading={"lazy"}
+              sizes="(min-width: 1024px) 25vw, 50vw"/>
             </div>
-          </div>
-        </div>
-
-        <div className={'py-12 px-6 lg:px-20'}>
-          <div className={`max-w-screen-xl w-full bg-light-main4`}>
-            <div className={`flex flex-col items-center gap-6`}>
-              <div className="grid gap-6 lg:gap-10 grid-cols-2 lg:grid-cols-4">
-                {featuredCollection?.products.nodes
-                  .slice(0, 4)
-                  .map((product) => (
-                    <FadeInItem key={product.id}>
-                      <ProductItem product={product} />
-                    </FadeInItem>
-                  ))}
+            <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 lg:pl-16`}>
+              <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>
+              <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>
+              <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>
+              <div className="mt-6 grid gap-6 lg:gap-10 grid-cols-2">
+                {featuredCollection?.products.nodes.slice(0, 2).map((product) => (
+                  <FadeInItem key={product.id}>
+                    <ProductItem  product={product} />
+                  </FadeInItem>
+                ))}
               </div>
               <div className={`flex justify-center items-center mt-4`}>
                 <Link
@@ -302,15 +233,10 @@ export default function Homepage() {
                before:transition-transform before:duration-500 before:ease-in-out
                hover:before:translate-x-0
             `}
-                  to={
-                    getAvailableLocaleUrlPartFromPathname(location.pathname) +
-                    `/collections/${featuredCollection?.handle}`
-                  }
+                  to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/${featuredCollection?.handle}`}
                 >
                   <div
-                    className={
-                      'relative z-10 flex gap-3 items-center justify-center'
-                    }
+                    className={'relative z-10 flex gap-3 items-center justify-center'}
                   >
                     <div className={''}>VIEW ALL</div>
                   </div>
@@ -320,6 +246,81 @@ export default function Homepage() {
           </div>
         </div>
       </div>
+
+      {/* Featured Collection section 2 */}
+      {/*<div*/}
+      {/*  className={`w-full flex flex-col justify-center items-center bg-light-main4 `}*/}
+      {/*>*/}
+      {/*  <div className={'relative w-full'}>*/}
+      {/*    <BannerSection*/}
+      {/*      aspectClass={'aspect-[1/1] lg:aspect-[6/1]'}*/}
+      {/*      overlayClass={'bg-black/30'}*/}
+      {/*      src={'/images/collection-banner.jpg'}*/}
+      {/*      collection={featuredCollection}*/}
+      {/*    />*/}
+      {/*    <div*/}
+      {/*      className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}*/}
+      {/*    >*/}
+      {/*      <div*/}
+      {/*        className={`flex flex-col items-center gap-6  text-light-bg1 max-w-screen-xl`}*/}
+      {/*      >*/}
+      {/*        <div className={`font-fancy text-3xl text-center`}>*/}
+      {/*          New Arrivals*/}
+      {/*        </div>*/}
+      {/*        <div className={`text-3xl font-[500] text-center`}>*/}
+      {/*          {featuredCollection?.title.toUpperCase()}*/}
+      {/*        </div>*/}
+      {/*        <div className={`text-sm font-[400] tracking-tight text-center`}>*/}
+      {/*          {featuredCollection?.description}*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+
+      {/*  <div className={'py-12 px-6 lg:px-20'}>*/}
+      {/*    <div className={`max-w-screen-xl w-full bg-light-main4`}>*/}
+      {/*      <div className={`flex flex-col items-center gap-6`}>*/}
+      {/*        <div className="grid gap-6 lg:gap-10 grid-cols-2 lg:grid-cols-4">*/}
+      {/*          {featuredCollection?.products.nodes*/}
+      {/*            .slice(0, 4)*/}
+      {/*            .map((product) => (*/}
+      {/*              <FadeInItem key={product.id}>*/}
+      {/*                <ProductItem product={product} />*/}
+      {/*              </FadeInItem>*/}
+      {/*            ))}*/}
+      {/*        </div>*/}
+      {/*        <div className={`flex justify-center items-center mt-4`}>*/}
+      {/*          <Link*/}
+      {/*            className={`*/}
+      {/*         relative overflow-hidden*/}
+      {/*         px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]*/}
+      {/*         text-sm font-[600] font-main text-light-bg1*/}
+      {/*         bg-light-main border-2 border-light-main*/}
+      {/*         transition-all duration-300 ease-in-out*/}
+      {/*         hover:text-light-main*/}
+      {/*         before:absolute before:inset-0*/}
+      {/*         before:bg-light-bg1 before:translate-x-[-110%]*/}
+      {/*         before:transition-transform before:duration-500 before:ease-in-out*/}
+      {/*         hover:before:translate-x-0*/}
+      {/*      `}*/}
+      {/*            to={*/}
+      {/*              getAvailableLocaleUrlPartFromPathname(location.pathname) +*/}
+      {/*              `/collections/${featuredCollection?.handle}`*/}
+      {/*            }*/}
+      {/*          >*/}
+      {/*            <div*/}
+      {/*              className={*/}
+      {/*                'relative z-10 flex gap-3 items-center justify-center'*/}
+      {/*              }*/}
+      {/*            >*/}
+      {/*              <div className={''}>VIEW ALL</div>*/}
+      {/*            </div>*/}
+      {/*          </Link>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {/*<FeaturedCollection collection={data.featuredCollection} />*/}
       {/*<RecommendedProducts products={data.recommendedProducts} />*/}

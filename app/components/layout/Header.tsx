@@ -26,7 +26,6 @@ import {
   getAvailableLocaleFromPathname,
   getAvailableLocaleUrlPartFromPathname,
 } from '~/common/utils/i18nUtils';
-import Tie from '/public/svg/tie.svg';
 import {APP_STRINGS} from '~/common/constants/appStrings';
 
 interface HeaderProps {
@@ -499,10 +498,10 @@ function HeaderCtas({
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             <Image
-              src="/svg/tie.svg"
+              src="/images/bow6.png"
               alt="hero-banner"
-              width={26}
-              height={26}
+              width={28}
+              height={28}
               className="object-contain"
             />
           </Await>
@@ -559,7 +558,7 @@ function CartBadge({count}: {count: number | null}) {
       <div className={'relative'}>
         <div className="relative group">
           <Image
-            src={"/images/bag.png"}
+            src={"/images/cart6.png"}
             alt="cart"
             width={24}
             height={24}

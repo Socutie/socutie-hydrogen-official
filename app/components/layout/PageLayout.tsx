@@ -37,6 +37,7 @@ export function PageLayout({
   publicStoreDomain,
   i18n
 }: PageLayoutProps) {
+  const location = useLocation();
   return (
     <Aside.Provider>
       <CartAside cart={cart} />
@@ -51,7 +52,7 @@ export function PageLayout({
           i18n={i18n}
         />
       )}
-      <main className={"mb-32"}>{children}</main>
+      <main className={`${location.pathname === '/' ? '' : 'mb-32'}`}>{children}</main>
       <Footer
         footer={footer}
         header={header}
@@ -65,7 +66,7 @@ export function PageLayout({
 function FloatingChangeLocaleButton() {
   return (
     <div
-      className="fixed bottom-6 right-6 bg-light-secondary text-light-bg1 py-2 px-3 rounded-full shadow-md z-50"
+      className="fixed bottom-6 right-6 bg-light-secondary text-light-bg1 py-2 px-3 rounded-full shadow-md z-40"
     >
       <SwitchLocaleCta/>
     </div>

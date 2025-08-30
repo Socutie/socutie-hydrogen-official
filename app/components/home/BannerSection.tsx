@@ -11,7 +11,7 @@ export function BannerSection({
   showSectionContent = false,
   src = '/images/hero-banner.jpg',
   aspectClass = 'aspect-[3/4] lg:aspect-[16/9]',
-  overlayClass = 'bg-black/0',
+  overlayClass = 'bg-black/20',
   hasLink = true
 }: {
   collection?: any;
@@ -61,41 +61,41 @@ export function BannerSection({
       <div className={`absolute inset-0 ${overlayClass} pointer-events-none`} />
 
       {/* Optional content */}
-      {/*<motion.div*/}
-      {/*  className={`${showSectionContent ? "" : "hidden"} absolute inset-0 flex flex-col items-center justify-center`}*/}
-      {/*  initial={{opacity: 0, y: -20}}*/}
-      {/*  whileInView={{opacity: 1, y: 0}}*/}
-      {/*  transition={{duration: 0.5, ease: 'easeOut'}}*/}
-      {/*  viewport={{ once: true }}*/}
-      {/*>*/}
-      {/*  <div className="font-fancy text-center text-light-bg1 text-2xl sm:text-3xl md:text-4xl mb-2 md:mb-4 mt-[40%] md:mt-[20%]">*/}
-      {/*    New Arrival*/}
-      {/*  </div>*/}
-      {/*  <div className="font-[600] text-center text-light-bg1 text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8">*/}
-      {/*    {`${collection ? collection.title : "Socutie Special Collection"}`}*/}
-      {/*  </div>*/}
-      {/*  <Link*/}
-      {/*    className={`*/}
-      {/*         relative overflow-hidden*/}
-      {/*         px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]*/}
-      {/*         text-sm font-[600] font-main text-light-bg1*/}
-      {/*         bg-light-main border-2 border-light-main*/}
-      {/*         transition-all duration-300 ease-in-out*/}
-      {/*         hover:text-light-main*/}
-      {/*         before:absolute before:inset-0*/}
-      {/*         before:bg-light-bg1 before:translate-x-[-110%]*/}
-      {/*         before:transition-transform before:duration-500 before:ease-in-out*/}
-      {/*         hover:before:translate-x-0*/}
-      {/*      `}*/}
-      {/*    to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `${collection ? `/collections/${collection.handle}` : "/collections/best-sellers"}`}*/}
-      {/*  >*/}
-      {/*    <div*/}
-      {/*      className={'relative z-10 flex gap-3 items-center justify-center'}*/}
-      {/*    >*/}
-      {/*      <div className={''}>EXPLORE NOW</div>*/}
-      {/*    </div>*/}
-      {/*  </Link>*/}
-      {/*</motion.div>*/}
+      <motion.div
+        className={`${showSectionContent ? "" : "hidden"} absolute inset-0 flex flex-col items-center justify-center`}
+        initial={{opacity: 0, y: -20}}
+        whileInView={{opacity: 1, y: 0}}
+        transition={{duration: 0.5, ease: 'easeOut'}}
+        viewport={{ once: true }}
+      >
+        <div className="font-fancy text-center text-light-bg1 text-2xl sm:text-3xl md:text-4xl mb-2 md:mb-4 mt-[40%] md:mt-[20%]">
+          New Arrival
+        </div>
+        <div className="font-[600] text-center text-light-bg1 text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8">
+          {`${collection ? collection.title : "Socutie Special Collection"}`}
+        </div>
+        <Link
+          className={`
+               relative overflow-hidden
+               px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]
+               text-sm font-[600] font-main text-light-bg1
+               bg-light-main border-2 border-light-main
+               transition-all duration-300 ease-in-out
+               hover:text-light-main
+               before:absolute before:inset-0
+               before:bg-light-bg1 before:translate-x-[-110%]
+               before:transition-transform before:duration-500 before:ease-in-out
+               hover:before:translate-x-0
+            `}
+          to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `${collection ? `/collections/${collection.handle}` : "/collections/best-sellers"}`}
+        >
+          <div
+            className={'relative z-10 flex gap-3 items-center justify-center'}
+          >
+            <div className={''}>EXPLORE NOW</div>
+          </div>
+        </Link>
+      </motion.div>
     </div>
   );
 }
