@@ -21,7 +21,7 @@ export function CartSummary({cart, layout}: CartSummaryProps) {
   return (
     <div
       aria-labelledby="cart-summary"
-      className={`flex flex-col gap-2 w-full px-6 bg-light-bg1 border-t border-t-light-bg2 h-[170px] ${layout !== 'page' ? "absolute bottom-20 justify-end" : ""}`}
+      className={`flex flex-col gap-2 w-full px-6 bg-light-bg1 border-t border-t-light-bg2 h-[170px] ${layout !== 'page' ? "absolute bottom-20 justify-end" : "pt-10"}`}
     >
       <div className="mb-1 flex justify-between items-center">
         <div className={"font-cute text-xl font-[600]"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].totalText}</div>

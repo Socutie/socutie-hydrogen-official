@@ -1,11 +1,11 @@
-import {type MetaFunction, useLoaderData} from 'react-router';
+import {type MetaFunction, useLoaderData, useLocation} from 'react-router';
 import type {CartQueryDataReturn} from '@shopify/hydrogen';
 import {CartForm} from '@shopify/hydrogen';
 import {
   data,
   type LoaderFunctionArgs,
   type ActionFunctionArgs,
-  type HeadersFunction,
+  type HeadersFunction, redirect,
 } from '@shopify/remix-oxygen';
 import {CartMain} from '~/components/cart/CartMain';
 
@@ -101,6 +101,8 @@ export async function action({request, context}: ActionFunctionArgs) {
 }
 
 export async function loader({context}: LoaderFunctionArgs) {
+  return redirect('/');
+
   const {cart} = context;
   return await cart.get();
 }

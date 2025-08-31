@@ -31,8 +31,8 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
   const cartHasItems = cart?.totalQuantity ? cart.totalQuantity > 0 : false;
 
   return (
-    <div className={"relative h-full w-full"}>
-      <div className={`flex flex-col px-6 h-[calc(100vh-250px)]`}>
+    <div className={`relative h-full w-full ${layout === 'page' ? " bg-red-500" : ""}`}>
+      <div className={`flex flex-col px-6 h-[calc(100vh-250px)] ${layout === 'page' ? "max-w-screen-xl" : ""}`}>
         <CartEmpty hidden={linesCount !== 0} layout={layout} />
         <div aria-labelledby="cart-lines" className="max-h-[calc(100vh-250px)] overflow-y-auto scrollbar-hidden">
           <ul>

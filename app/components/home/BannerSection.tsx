@@ -69,7 +69,7 @@ export function BannerSection({
         viewport={{ once: true }}
       >
         <div className="font-fancy text-center text-light-bg1 text-2xl sm:text-3xl md:text-4xl mb-2 md:mb-4 mt-[40%] md:mt-[20%]">
-          New Arrival
+          New Arrivals
         </div>
         <div className="font-[600] text-center text-light-bg1 text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8">
           {`${collection ? collection.title.toUpperCase() : "Socutie Special Collection"}`}
