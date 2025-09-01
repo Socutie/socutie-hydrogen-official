@@ -508,8 +508,8 @@ function HeaderCtas({
             <Image
               src="/svg/bow.svg"
               alt="bow"
-              width={30}
-              height={30}
+              width={28}
+              height={28}
               className="object-contain"
             />
           </Await>
@@ -566,7 +566,7 @@ function CartBadge({count}: {count: number | null}) {
       <div className={'relative'}>
         <div className="relative group">
           <Image
-            src={"/images/cart6.png"}
+            src={"/svg/cart.svg"}
             alt="cart"
             width={24}
             height={24}

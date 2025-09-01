@@ -120,7 +120,7 @@ export default function Homepage() {
         />
       </div>
 
-      <div className={'h-16'}></div>
+      <div className={'h-20'}></div>
 
       {/* Best Sellers Display */}
       {bestSellersCollection && (
@@ -129,7 +129,7 @@ export default function Homepage() {
         </div>
       )}
 
-      <div className={'h-16'}></div>
+      <div className={'h-20'}></div>
 
       {/* Introduction section */}
       <div
@@ -191,7 +191,7 @@ export default function Homepage() {
         </FadeInDiv>
       </div>
 
-      <div className={'h-16'}></div>
+      <div className={'h-20'}></div>
 
       <FeedbackDisplay />
 
@@ -200,10 +200,10 @@ export default function Homepage() {
       {/* Featured Collection section */}
       <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
         <div className={`max-w-screen-xl w-full bg-light-main4`}>
-          <div className={`grid grid-cols-1 lg:grid-cols-2 lg:gap-8`}>
+          <div className={`grid grid-cols-1 lg:grid-cols-2 lg:gap-10`}>
             <motion.div
               className={"flex justify-center items-center py-16 px-6 sm:px-16"}
-              initial={{rotate: 10, opacity: 0}}
+              initial={{rotate: 5, opacity: 0}}
               whileInView={{rotate: -3, opacity: 1}}
               transition={{duration: 0.75, ease: 'easeOut'}}
               viewport={{once: true, amount: 0.3}}
