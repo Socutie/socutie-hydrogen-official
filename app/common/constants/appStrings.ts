@@ -33,7 +33,7 @@ export const APP_STRINGS = {
     footerInfoWarrantyText: "Chính sách bảo hành",
     footerContactTitle: "LIÊN HỆ",
     footerFollowUsTitle: "FOLLOW US",
-    footerContactPhone: "090 951 8441",
+    footerContactPhone: "090 951 8441 • 093 201 9144",
     footerContactEmail: "socutiesg2023@gmail.com",
 
     // Product page
@@ -110,7 +110,7 @@ export const APP_STRINGS = {
     footerInfoWarrantyText: "Warranty policy",
     footerContactTitle: "CONTACT",
     footerFollowUsTitle: "FOLLOW US",
-    footerContactPhone: "090 951 8441",
+    footerContactPhone: "090 951 8441 • 093 201 9144",
     footerContactEmail: "socutiesg2023@gmail.com",
 
     // Product page
