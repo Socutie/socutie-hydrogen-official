@@ -262,10 +262,29 @@ export default function Homepage() {
 
       {/* Sign in section */}
       <div className={"w-full relative"}>
-        <BannerSection
-          overlayClass={"bg-black/30"}
-          aspectClass={"w-full h-96"}
+        <motion.div
+          className="w-full overflow-hidden" // ensures no layout shift
+          initial={{opacity: 0}}
+          whileInView={{opacity: 1}}
+          transition={{duration: 0.5, ease: 'easeOut'}}
+          viewport={{once: true}}
+        >
+          <motion.div
+            initial={{scale: 1.1}}
+            whileInView={{scale: 1}}
+            transition={{duration: 0.5, ease: 'easeOut'}}
+            viewport={{once: true}}
+          >
+        <Image
+          src={'/images/hero-banner.jpg'}
+          alt="hero-banner"
+          className={`w-full h-96 object-cover `}
+          sizes="(max-width: 768px) 1000px, 100vw"
+          loading={'eager'}
         />
+          </motion.div>
+        </motion.div>
+        <div className={`absolute inset-0 bg-black/30 pointer-events-none`} />
         <motion.div
           className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}
           initial={{y: -40, opacity: 0}}
