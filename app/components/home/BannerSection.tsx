@@ -7,19 +7,17 @@ import {motion} from 'framer-motion';
 import {Link, useLocation} from 'react-router';
 
 export function BannerSection({
-  collection,
+  collection = null,
   showSectionContent = false,
   src = '/images/hero-banner.jpg',
   aspectClass = 'aspect-[3/4] lg:aspect-[16/9]',
   overlayClass = 'bg-black/20',
-  hasLink = true
 }: {
   collection?: any;
   showSectionContent?: boolean;
   src?: string;
   aspectClass?: string;
   overlayClass?: string;
-  hasLink?: boolean;
 }) {
   const location = useLocation();
 
@@ -38,22 +36,13 @@ export function BannerSection({
           transition={{duration: 0.5, ease: 'easeOut'}}
           viewport={{once: true}}
         >
-          <a
-            target={'_blank'}
-            rel="noopener noreferrer"
-            href={
-              'https://www.instagram.com/p/DNqQbWeJ_uV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
-            }
-            className={`${hasLink ? '' : 'pointer-events-none'}`}
-          >
             <Image
               src={src}
               alt="hero-banner"
               className={`w-full h-auto object-cover ${aspectClass}`}
-              sizes="100vw"
+              sizes="(max-width: 768px) 1000px, 100vw"
               loading={'eager'}
             />
-          </a>
         </motion.div>
       </motion.div>
 
@@ -92,7 +81,7 @@ export function BannerSection({
           <div
             className={'relative z-10 flex gap-3 items-center justify-center'}
           >
-            <div className={''}>EXPLORE NOW</div>
+            <div className={''}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].exploreNowText.toUpperCase()}</div>
           </div>
         </Link>
       </motion.div>

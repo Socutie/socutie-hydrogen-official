@@ -486,6 +486,8 @@ function HeaderCtas({
   isLoggedIn,
   cart,
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+  const location = useLocation();
+
   return (
     <nav className="flex gap-4 sm:gap-6" role="navigation">
       {/*<NavLink className={"hidden sm:flex"} prefetch="intent" to="/account" style={activeLinkStyle}>*/}
@@ -498,9 +500,9 @@ function HeaderCtas({
 
       {/* Shopify customer account login */}
       <a
-        href={'https://shopify.com/67120103510/account'}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={`https://shopify.com/67120103510/account?locale=${getAvailableLocaleFromPathname(location.pathname)}`}
+        // target="_blank"
+        // rel="noopener noreferrer"
         className={'flex'}
       >
         <Suspense fallback="Sign in">

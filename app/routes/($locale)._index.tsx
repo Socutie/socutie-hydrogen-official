@@ -34,7 +34,7 @@ import {APP_STRINGS} from '~/common/constants/appStrings';
 import {motion} from 'framer-motion';
 
 export const meta: MetaFunction = () => {
-  return [{title: 'Socutie | Home'}];
+  return [{title: 'Socutie'}];
 };
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -129,12 +129,12 @@ export default function Homepage() {
         </div>
       )}
 
-      <div className={'h-20'}></div>
+      <div className={'h-24'}></div>
 
       {/* Introduction section */}
       <div
         className={
-          'w-full py-16 px-10 bg-light-main4 flex items-center justify-center flex-col'
+          'w-full py-12 px-10 bg-light-main4 flex items-center justify-center flex-col'
         }
       >
         <FadeInDiv>
@@ -191,11 +191,11 @@ export default function Homepage() {
         </FadeInDiv>
       </div>
 
-      <div className={'h-20'}></div>
+      <div className={'h-24'}></div>
 
       <FeedbackDisplay />
 
-      <div className={'h-32'}></div>
+      <div className={'h-36'}></div>
 
       {/* Featured Collection section */}
       <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
@@ -247,7 +247,7 @@ export default function Homepage() {
                     <div
                       className={'relative z-10 flex gap-3 items-center justify-center'}
                     >
-                      <div className={''}>VIEW ALL</div>
+                      <div className={''}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].exploreNowText.toUpperCase()}</div>
                     </div>
                   </Link>
                 </div>
@@ -258,83 +258,59 @@ export default function Homepage() {
         </div>
       </div>
 
-      {/* Featured Collection section 2 */}
-      {/*<div*/}
-      {/*  className={`w-full flex flex-col justify-center items-center bg-light-main4 `}*/}
-      {/*>*/}
-      {/*  <div className={'relative w-full'}>*/}
-      {/*    <BannerSection*/}
-      {/*      aspectClass={'aspect-[1/1] lg:aspect-[6/1]'}*/}
-      {/*      overlayClass={'bg-black/30'}*/}
-      {/*      src={'/images/collection-banner.jpg'}*/}
-      {/*      collection={featuredCollection}*/}
-      {/*    />*/}
-      {/*    <div*/}
-      {/*      className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}*/}
-      {/*    >*/}
-      {/*      <div*/}
-      {/*        className={`flex flex-col items-center gap-6  text-light-bg1 max-w-screen-xl`}*/}
-      {/*      >*/}
-      {/*        <div className={`font-fancy text-3xl text-center`}>*/}
-      {/*          New Arrivals*/}
-      {/*        </div>*/}
-      {/*        <div className={`text-3xl font-[500] text-center`}>*/}
-      {/*          {featuredCollection?.title.toUpperCase()}*/}
-      {/*        </div>*/}
-      {/*        <div className={`text-sm font-[400] tracking-tight text-center`}>*/}
-      {/*          {featuredCollection?.description}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
+      <div className={'h-32'}></div>
 
-      {/*  <div className={'py-12 px-6 lg:px-20'}>*/}
-      {/*    <div className={`max-w-screen-xl w-full bg-light-main4`}>*/}
-      {/*      <div className={`flex flex-col items-center gap-6`}>*/}
-      {/*        <div className="grid gap-6 lg:gap-10 grid-cols-2 lg:grid-cols-4">*/}
-      {/*          {featuredCollection?.products.nodes*/}
-      {/*            .slice(0, 4)*/}
-      {/*            .map((product) => (*/}
-      {/*              <FadeInItem key={product.id}>*/}
-      {/*                <ProductItem product={product} />*/}
-      {/*              </FadeInItem>*/}
-      {/*            ))}*/}
-      {/*        </div>*/}
-      {/*        <div className={`flex justify-center items-center mt-4`}>*/}
-      {/*          <Link*/}
-      {/*            className={`*/}
-      {/*         relative overflow-hidden*/}
-      {/*         px-6 md:px-8 py-3 flex justify-center items-center rounded-[4px]*/}
-      {/*         text-sm font-[600] font-main text-light-bg1*/}
-      {/*         bg-light-main border-2 border-light-main*/}
-      {/*         transition-all duration-300 ease-in-out*/}
-      {/*         hover:text-light-main*/}
-      {/*         before:absolute before:inset-0*/}
-      {/*         before:bg-light-bg1 before:translate-x-[-110%]*/}
-      {/*         before:transition-transform before:duration-500 before:ease-in-out*/}
-      {/*         hover:before:translate-x-0*/}
-      {/*      `}*/}
-      {/*            to={*/}
-      {/*              getAvailableLocaleUrlPartFromPathname(location.pathname) +*/}
-      {/*              `/collections/${featuredCollection?.handle}`*/}
-      {/*            }*/}
-      {/*          >*/}
-      {/*            <div*/}
-      {/*              className={*/}
-      {/*                'relative z-10 flex gap-3 items-center justify-center'*/}
-      {/*              }*/}
-      {/*            >*/}
-      {/*              <div className={''}>VIEW ALL</div>*/}
-      {/*            </div>*/}
-      {/*          </Link>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+      {/* Sign in section */}
+      <div className={"w-full relative"}>
+        <BannerSection
+          overlayClass={"bg-black/30"}
+          aspectClass={"w-full h-96"}
+        />
+        <motion.div
+          className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}
+          initial={{y: -40, opacity: 0}}
+          whileInView={{y: 0, opacity: 1}}
+          transition={{duration: 0.5, ease: 'easeOut'}}
+          viewport={{once: true}}
+        >
+          <div
+            className={`flex flex-col items-center gap-6 text-light-bg1 max-w-screen-xl`}
+          >
+            <div className={"rounded-[100%] p-4 bg-light-main4"}>
+              <Image
+                src="/svg/bow.svg"
+                alt="bow"
+                width={42}
+                height={42}
+                className="object-contain"
+              />
+            </div>
+            <div className={"tracking-tight text-2xl lg:text-3xl font-[500] text-center"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginTitle.toUpperCase()}</div>
 
-      {/*<FeaturedCollection collection={data.featuredCollection} />*/}
-      {/*<RecommendedProducts products={data.recommendedProducts} />*/}
+            <div className={"text-center tracking-tight"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginText}</div>
+            <a
+              href={`https://shopify.com/67120103510/account?locale=${getAvailableLocaleFromPathname(location.pathname)}`}
+              className={`
+               relative overflow-hidden
+               w-fit px-6 py-3 flex justify-center items-center rounded-[4px]
+               text-sm font-[600] font-main text-light-bg1
+               bg-light-main border-2 border-light-main
+               transition-all duration-300 ease-in-out
+               hover:text-light-main
+               before:absolute before:inset-0
+               before:bg-light-bg1 before:translate-x-[-110%]
+               before:transition-transform before:duration-500 before:ease-in-out
+               hover:before:translate-x-0`}
+            >
+              <div
+                className={'relative z-10 flex gap-3 items-center justify-center'}
+              >
+                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginNowText}
+              </div>
+            </a>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -362,7 +338,7 @@ function FeedbackDisplay() {
       <FadeInDiv>
         <div
           className={
-            'tracking-tight text-2xl lg:text-3xl font-[500] text-light-text1 text-center font-title mb-8'
+            'tracking-tight text-2xl lg:text-3xl font-[500] text-light-text1 text-center mb-8'
           }
         >
           {

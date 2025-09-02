@@ -3,6 +3,7 @@ export const APP_STRINGS = {
     // General
     storeName: "Socutie",
     viewAllText: "Xem tất cả",
+    exploreNowText: "Khám phá ngay",
 
     // Cart
     cartTitle: "GIỎ HÀNG",
@@ -21,7 +22,10 @@ export const APP_STRINGS = {
     feedback: "CUTIES FEEDBACK",
     introduceTitle: "Self-designed fashion for Cuties",
     introduceText: "Xinh xắn quá mức khiến người khác rung động. Mỗi thiết kế của Socutie hướng đến phong cách đơn giản, nữ tính với một chút dễ thương, nhẹ nhàng mà có gu là đặc điểm của các Cuties đó!",
-    
+    loginTitle: "JOIN THE CUTIES",
+    loginText: "Tham gia cộng đồng Cuties để nhận nhiều ưu đãi độc quyền đến từ Socutie!",
+    loginNowText: "THAM GIA NGAY",
+
     // Footer
     footerIntroduceText: "Self-designed fashion for Cuties",
     footerInfoTitle: "CHÍNH SÁCH",
@@ -75,6 +79,8 @@ export const APP_STRINGS = {
     // General
     storeName: "Socutie",
     viewAllText: "Discover all",
+    exploreNowText: "Explore now",
+
 
     // Cart
     cartTitle: "CART",
@@ -93,6 +99,9 @@ export const APP_STRINGS = {
     feedback: "CUTIES FEEDBACK",
     introduceTitle: "Designed and Crafted for Cuties",
     introduceText: "Dear Cuties, we always stand by your side through every design, carefully crafting each detail so that every product is not just something you wear, but also a token of trust, confidence, and your own unique charm.",
+    loginTitle: "JOIN THE CUTIES",
+    loginText: "Join the Cuties community to enjoy exclusive offers from SoCutie!",
+    loginNowText: "JOIN US NOW",
 
     // Footer
     footerIntroduceText: "Designed and crafted with passion in HCM City, Vietnam.",

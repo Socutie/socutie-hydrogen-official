@@ -105,7 +105,6 @@ export default function Collection() {
           aspectClass={"aspect-[3/4] lg:aspect-[21/9]"}
           src={imgUrl ? imgUrl.url : '/images/collection-banner.jpg'}
           overlayClass={'bg-black/30'}
-          hasLink={false}
         />
         <div
           className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}

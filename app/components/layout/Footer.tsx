@@ -65,6 +65,7 @@ export function Footer({
                           ].footerIntroduceText
                         }
                       </div>
+
                     </div>
                   </FadeInItem>
 

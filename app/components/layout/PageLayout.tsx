@@ -52,7 +52,7 @@ export function PageLayout({
           i18n={i18n}
         />
       )}
-      <main className={`${cutAnyLocalePartFromPathname(location.pathname) === '/' ? '' : 'mb-32'}`}>{children}</main>
+      <main className={'mb-32'}>{children}</main>
       <Footer
         footer={footer}
         header={header}

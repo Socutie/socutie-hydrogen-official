@@ -57,7 +57,7 @@ export function ProductItem({
             src={initImgUrl}
             alt={product.title}
             className={`z-20 relative w-full h-auto aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
-            loading={loading}
+            loading={"eager"}
             sizes="(min-width: 1024px) 25vw, 50vw"
           />
 
