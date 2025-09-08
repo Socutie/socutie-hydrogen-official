@@ -32,6 +32,7 @@ import {
 } from '~/common/utils/i18nUtils';
 import {APP_STRINGS} from '~/common/constants/appStrings';
 import {motion} from 'framer-motion';
+import {Logo} from '~/components/layout/Header';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Socutie'}];
@@ -114,7 +115,11 @@ export default function Homepage() {
       {/* Hero Banner */}
       <div className={'w-full'}>
         <BannerSection
-          src={featuredCollection?.image ? featuredCollection?.image.url : '/images/hero-banner.jpg'}
+          src={
+            featuredCollection?.image
+              ? featuredCollection?.image.url
+              : '/images/hero-banner.jpg'
+          }
           collection={featuredCollection}
           showSectionContent={true}
         />
@@ -124,7 +129,7 @@ export default function Homepage() {
 
       {/* Best Sellers Display */}
       {bestSellersCollection && (
-        <div key={bestSellersCollection.id}>
+        <div className={` `} key={bestSellersCollection.id}>
           <BestSellersDisplay products={bestSellersCollection.products.nodes} />
         </div>
       )}
@@ -198,35 +203,49 @@ export default function Homepage() {
       <div className={'h-36'}></div>
 
       {/* Featured Collection section */}
-      <div className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}>
-        <div className={`max-w-screen-xl w-full bg-light-main4`}>
+      <div
+        className={`w-full flex justify-center items-center bg-light-main4 px-6 lg:px-20`}
+      >
+        <div className={`max-w-screen-xl w-full`}>
           <div className={`grid grid-cols-1 lg:grid-cols-2 lg:gap-10`}>
             <motion.div
-              className={"flex justify-center items-center py-16 px-6 sm:px-16"}
+              className={'flex justify-center items-center py-16 px-6 sm:px-16'}
               initial={{rotate: 5, opacity: 0}}
               whileInView={{rotate: -3, opacity: 1}}
               transition={{duration: 0.75, ease: 'easeOut'}}
               viewport={{once: true, amount: 0.3}}
             >
               <Image
-              src={'/images/collection-banner.jpg'}
-              alt={'collection-image'}
-              className={`w-full aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
-              loading={"eager"}
-              sizes="(min-width: 1024px) 25vw, 50vw"
+                src={'/images/collection-banner.jpg'}
+                alt={'collection-image'}
+                className={`w-full aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
+                loading={'eager'}
+                sizes="(min-width: 1024px) 25vw, 50vw"
               />
             </motion.div>
             <FadeInDiv viewportAmount={0.4}>
-              <div className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 `}>
-                <div className={`font-fancy text-3xl text-center`}>New Arrivals</div>
-                <div className={`text-3xl font-[500] text-center`}>{featuredCollection?.title.toUpperCase()}</div>
-                <div className={`text-sm font-[400] tracking-tight text-center`}>{featuredCollection?.description}</div>
+              <div
+                className={`flex flex-col items-center gap-6 pb-10 lg:py-10 px-6 `}
+              >
+                <div className={`font-fancy text-3xl text-center`}>
+                  New Arrivals
+                </div>
+                <div className={`text-2xl sm:text-3xl font-[500] text-center`}>
+                  {featuredCollection?.title.toUpperCase()}
+                </div>
+                <div
+                  className={`text-sm font-[400] tracking-tight text-center`}
+                >
+                  {featuredCollection?.description}
+                </div>
                 <div className="mt-6 grid gap-6 lg:gap-10 grid-cols-2">
-                  {featuredCollection?.products.nodes.slice(0, 2).map((product) => (
-                    <FadeInItem key={product.id}>
-                      <ProductItem  product={product} />
-                    </FadeInItem>
-                  ))}
+                  {featuredCollection?.products.nodes
+                    .slice(0, 2)
+                    .map((product) => (
+                      <FadeInItem key={product.id}>
+                        <ProductItem product={product} />
+                      </FadeInItem>
+                    ))}
                 </div>
                 <div className={`flex justify-center items-center mt-4`}>
                   <Link
@@ -242,91 +261,66 @@ export default function Homepage() {
                before:transition-transform before:duration-500 before:ease-in-out
                hover:before:translate-x-0
             `}
-                    to={getAvailableLocaleUrlPartFromPathname(location.pathname) + `/collections/${featuredCollection?.handle}`}
+                    to={
+                      getAvailableLocaleUrlPartFromPathname(location.pathname) +
+                      `/collections/${featuredCollection?.handle}`
+                    }
                   >
                     <div
-                      className={'relative z-10 flex gap-3 items-center justify-center'}
+                      className={
+                        'relative z-10 flex gap-3 items-center justify-center'
+                      }
                     >
-                      <div className={''}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].exploreNowText.toUpperCase()}</div>
+                      <div className={''}>
+                        {APP_STRINGS[
+                          getAvailableLocaleFromPathname(location.pathname)
+                        ].exploreNowText.toUpperCase()}
+                      </div>
                     </div>
                   </Link>
                 </div>
               </div>
             </FadeInDiv>
-
           </div>
         </div>
       </div>
 
       <div className={'h-32'}></div>
 
-      {/* Sign in section */}
-      <div className={"w-full relative"}>
-        <motion.div
-          className="w-full overflow-hidden" // ensures no layout shift
-          initial={{opacity: 0}}
-          whileInView={{opacity: 1}}
-          transition={{duration: 0.5, ease: 'easeOut'}}
-          viewport={{once: true}}
-        >
-          <motion.div
-            initial={{scale: 1.1}}
-            whileInView={{scale: 1}}
-            transition={{duration: 0.5, ease: 'easeOut'}}
-            viewport={{once: true}}
-          >
-        <Image
-          src={'/images/hero-banner.jpg'}
-          alt="hero-banner"
-          className={`w-full h-96 object-cover `}
-          sizes="(max-width: 768px) 1000px, 100vw"
-          loading={'eager'}
-        />
-          </motion.div>
-        </motion.div>
-        <div className={`absolute inset-0 bg-black/30 pointer-events-none`} />
+      {/* About us section */}
+      <div className={'w-full relative'}>
+            <Image
+              src={'/images/hero-banner.jpg'}
+              alt="hero-banner"
+              className={`w-full object-cover h-[500px] sm:h-[450px]`}
+              sizes="100vw"
+              loading={'eager'}
+            />
+        <div className={`absolute inset-0 bg-black/40 pointer-events-none`} />
         <motion.div
           className={`absolute inset-0 flex justify-center items-center top-0 bottom-0 px-6 lg:px-20`}
-          initial={{y: -40, opacity: 0}}
+          initial={{y: 40, opacity: 0}}
           whileInView={{y: 0, opacity: 1}}
           transition={{duration: 0.5, ease: 'easeOut'}}
-          viewport={{once: true}}
+          viewport={{once: true, amount: 0.4}}
         >
           <div
             className={`flex flex-col items-center gap-6 text-light-bg1 max-w-screen-xl`}
           >
-            <div className={"rounded-[100%] p-4 bg-light-main4"}>
-              <Image
-                src="/svg/bow.svg"
-                alt="bow"
-                width={42}
-                height={42}
-                className="object-contain"
-              />
+            <div className={'rounded-[100%] p-3 bg-light-main4'}>
+              <Logo width={46} height={46} pathname={location.pathname}/>
             </div>
-            <div className={"tracking-tight text-2xl lg:text-3xl font-[500] text-center"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginTitle.toUpperCase()}</div>
-
-            <div className={"text-center tracking-tight"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginText}</div>
-            <a
-              href={`https://shopify.com/67120103510/account?locale=${getAvailableLocaleFromPathname(location.pathname)}`}
-              className={`
-               relative overflow-hidden
-               w-fit px-6 py-3 flex justify-center items-center rounded-[4px]
-               text-sm font-[600] font-main text-light-bg1
-               bg-light-main border-2 border-light-main
-               transition-all duration-300 ease-in-out
-               hover:text-light-main
-               before:absolute before:inset-0
-               before:bg-light-bg1 before:translate-x-[-110%]
-               before:transition-transform before:duration-500 before:ease-in-out
-               hover:before:translate-x-0`}
-            >
-              <div
-                className={'relative z-10 flex gap-3 items-center justify-center'}
-              >
-                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].loginNowText}
+            <div className={`text-xl sm:text-2xl font-[500] text-center`}>
+              {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsTitle}
+            </div>
+            <div className={" mb-1 flex flex-col gap-3 text-sm  max-w-screen-sm"}>
+              <div className={'text-center tracking-tight leading-relaxed'}>
+                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText1}
               </div>
-            </a>
+              <div className={'text-center tracking-tight leading-relaxed'}>
+                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText2}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -411,7 +405,9 @@ function BestSellersDisplay({products}: {products: ProductSummaryFragment[]}) {
   const location = useLocation();
 
   return (
-    <div className="mx-6 lg:mx-20 max-w-screen-xl flex flex-col items-center">
+    <div
+      className={'mx-6  lg:mx-20 max-w-screen-xl flex flex-col items-center'}
+    >
       <FadeInDiv>
         <div
           className={

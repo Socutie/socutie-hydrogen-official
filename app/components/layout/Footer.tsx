@@ -34,7 +34,7 @@ export function Footer({
         {(footer) => (
           <footer
             key={location.pathname}
-            className="w-full py-16 bg-light-main3 flex flex-col items-center px-6 lg:px-20"
+            className="w-full bg-light-main3 flex flex-col items-center px-6 lg:px-20"
           >
             {/*{footer?.menu && header.shop.primaryDomain?.url && (*/}
             {/*  <FooterMenu*/}
@@ -43,7 +43,9 @@ export function Footer({
             {/*    publicStoreDomain={publicStoreDomain}*/}
             {/*  />*/}
             {/*)}*/}
-            <div className={'w-full max-w-screen-xl'}>
+            <LoginSection/>
+
+            <div className={'w-full max-w-screen-xl py-16'}>
               <FadeInStagger>
                 <div
                   className={
@@ -204,6 +206,59 @@ export function Footer({
       </Await>
     </Suspense>
   );
+}
+
+function LoginSection() {
+  const location = useLocation();
+
+  return (
+    <div className={"w-full flex flex-col items-center py-16 gap-6 text-sm border-b border-black/10 "}>
+      <FadeInDiv>
+        <div className={"mb-6 text-2xl font-[600] text-center"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].becomeMemberTitle}</div>
+        <div className={"mb-2 flex flex-col gap-2"}>
+          <div className={'mb-2 text-center tracking-tight'}>
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].becomeMemberText}
+          </div>
+          <div className={'text-center tracking-tight font-[500]'}>
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].becomeMemberPref1}
+          </div>
+          <div className={'text-center tracking-tight font-[500]'}>
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].becomeMemberPref2}
+          </div>
+          <div className={'text-center tracking-tight font-[500]'}>
+            {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].becomeMemberPref3}
+          </div>
+        </div>
+      </FadeInDiv>
+
+      <FadeInDiv><a
+        href={`https://shopify.com/67120103510/account?locale=${getAvailableLocaleFromPathname(location.pathname)}`}
+        className={`
+               relative overflow-hidden
+               w-fit px-6 py-3 flex justify-center items-center rounded-full
+               text-sm font-[600] font-main text-light-bg1
+               bg-light-main border-2 border-light-main
+               transition-all duration-300 ease-in-out
+               hover:text-light-main
+               before:absolute before:inset-0
+               before:bg-light-bg1 before:translate-x-[-110%]
+               before:transition-transform before:duration-500 before:ease-in-out
+               hover:before:translate-x-0`}
+      >
+        <div
+          className={
+            'relative z-10 flex gap-3 items-center justify-center'
+          }
+        >
+          {
+            APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)]
+              .loginNowText
+          }
+        </div>
+      </a></FadeInDiv>
+
+    </div>
+  )
 }
 
 function FooterMenu({

@@ -68,7 +68,7 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: "/images/bow6.png"},
+    {rel: 'icon', type: 'image/svg+xml', href: "/svg/bow-pink.svg"},
   ];
 }
 
