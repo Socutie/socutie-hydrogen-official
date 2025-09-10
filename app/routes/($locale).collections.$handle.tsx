@@ -5,7 +5,7 @@ import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 import {ProductItem} from '~/components/ProductItem';
 import {COLLECTION_WITH_PRODUCTS_QUERY} from "~/custom-queries/customQueries";
-import {BannerSection} from '~/components/home/BannerSection';
+import {BannerSection} from '~/components/custom/BannerSection';
 import {ProductCollectionSortKeys} from '@shopify/hydrogen/storefront-api-types';
 import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {ChevronDown} from 'lucide-react';

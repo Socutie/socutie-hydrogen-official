@@ -13,7 +13,7 @@ export async function createAppLoadContext(
   executionContext: ExecutionContext,
 ) {
   /**
-   * Open a cache instance in the worker and a home session instance.
+   * Open a cache instance in the worker and a custom session instance.
    */
   if (!env?.SESSION_SECRET) {
     throw new Error('SESSION_SECRET environment variable is not set');

@@ -82,6 +82,17 @@ export function Footer({
                         }
                       </div>
                       <Link
+                        to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/about-socutie`}
+                      >
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                              ].footerInfoAboutSocutieText
+                          }
+                        </div>
+                      </Link>
+                      <Link
                         to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-giao-hang`}
                       >
                         <div className={'text-sm'}>

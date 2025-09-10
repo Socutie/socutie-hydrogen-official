@@ -5,7 +5,7 @@ import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
  * If a cart exists it's updated with the discount, otherwise a cart is created with the discount already applied
  *
  * @example
- * Example path applying a discount and optional redirecting (defaults to the home page)
+ * Example path applying a discount and optional redirecting (defaults to the custom page)
  * ```js
  * /discount/FREESHIPPING?redirect=/products
  *

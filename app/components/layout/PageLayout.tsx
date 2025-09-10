@@ -52,6 +52,7 @@ export function PageLayout({
           i18n={i18n}
         />
       )}
+      {/* bg-[url(/images/flower-bg.png)] */}
       <main className={'pb-32'}>{children}</main>
       <Footer
         footer={footer}

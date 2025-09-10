@@ -8,3 +8,7 @@
 .scrollbar-hidden::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
 }
+.flipbook-container {
+    touch-action: pan-x; /* chỉ cho phép kéo ngang */
+    overscroll-behavior: contain; /* chặn hiệu ứng overscroll giật */
+}

@@ -6,7 +6,7 @@ import {
 } from '@shopify/remix-oxygen';
 
 /**
- * This is a home session implementation for your Hydrogen shop.
+ * This is a custom session implementation for your Hydrogen shop.
  * Feel free to customize it to your needs, add helper methods, or
  * swap out the cookie-based implementation with something else!
  */

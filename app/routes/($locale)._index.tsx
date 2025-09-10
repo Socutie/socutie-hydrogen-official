@@ -19,7 +19,7 @@ import {
   BEST_SELLERS_PRODUCTS_QUERY,
   HOMEPAGE_COLLECTIONS_MENU_QUERY,
 } from '~/custom-queries/customQueries';
-import {BannerSection} from '~/components/home/BannerSection';
+import {BannerSection} from '~/components/custom/BannerSection';
 import {
   FadeInItem,
   FadeInStagger,
@@ -33,6 +33,8 @@ import {
 import {APP_STRINGS} from '~/common/constants/appStrings';
 import {motion} from 'framer-motion';
 import {Logo} from '~/components/layout/Header';
+import HTMLFlipBook from "react-pageflip";
+import {HomeBook} from "~/components/custom/HomeBook";
 
 export const meta: MetaFunction = () => {
   return [{title: 'Socutie'}];
@@ -292,7 +294,7 @@ export default function Homepage() {
             <Image
               src={'/images/hero-banner.jpg'}
               alt="hero-banner"
-              className={`w-full object-cover h-[500px] sm:h-[450px]`}
+              className={`w-full object-cover h-[400px] sm:h-[300px]`}
               sizes="100vw"
               loading={'eager'}
             />
@@ -308,22 +310,38 @@ export default function Homepage() {
             className={`flex flex-col items-center gap-6 text-light-bg1 max-w-screen-xl`}
           >
             <div className={'rounded-[100%] p-3 bg-light-main4'}>
-              <Logo width={46} height={46} pathname={location.pathname}/>
+              <Logo width={46} height={46} pathname={location.pathname} disableNavigate={true}/>
             </div>
             <div className={`text-xl sm:text-2xl font-[500] text-center`}>
               {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsTitle}
             </div>
             <div className={" mb-1 flex flex-col gap-3 text-sm  max-w-screen-sm"}>
               <div className={'text-center tracking-tight leading-relaxed'}>
-                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText1}
+                &#34;{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText1}&#34;
               </div>
-              <div className={'text-center tracking-tight leading-relaxed'}>
-                {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText2}
-              </div>
+            {/*  <div className={'text-center tracking-tight leading-relaxed'}>*/}
+            {/*    {APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].aboutUsText2}*/}
+            {/*  </div>*/}
             </div>
           </div>
         </motion.div>
       </div>
+
+      <div className={"h-16"}></div>
+
+      {/* Socutie Handbook */}
+      <motion.div
+        className={"w-full flex justify-center px-2"}
+        initial={{x: -50, opacity: 0}}
+        whileInView={{x: 0, opacity: 1}}
+        transition={{duration: 0.5, ease: 'easeOut'}}
+        viewport={{once: true, amount: 0.4}}
+      >
+        <div className={"w-full max-w-[800px]"}>
+          <HomeBook/>
+        </div>
+      </motion.div>
+
     </div>
   );
 }
@@ -449,6 +467,8 @@ function BestSellersDisplay({products}: {products: ProductSummaryFragment[]}) {
     </div>
   );
 }
+
+
 
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {

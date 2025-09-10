@@ -235,33 +235,33 @@ export function Header({
 }
 
 export function Logo({
-  width = 64,
-  height = 64,
-  pathname,
-}: {
+                       width = 64,
+                       height = 64,
+                       pathname,
+                       disableNavigate = false,
+                     }: {
   width?: number;
   height?: number;
   pathname: string;
+  disableNavigate?: boolean;
 }) {
-  const sizeClassName = `w-[${width}px] h-[${height}px]`
+  const logo = (
+    <Image
+      src="/images/logo.png"
+      alt="logo"
+      width={width}
+      height={height}
+      className="object-contain"
+    />
+  );
+
+  if (disableNavigate) {
+    return logo;
+  }
 
   return (
     <a href={`${getAvailableLocaleUrlPartFromPathname(pathname)}/`}>
-      {/*<div className={`font-fancy font-medium text-[40px] ${className}`}>SoCutie</div>*/}
-      {/* src="/images/logo.png" */}
-      <Image
-        src="/images/logo.png"
-        alt="hero-banner"
-        width={width}
-        height={height}
-        className="object-contain"
-      />
-      {/*<img*/}
-      {/*  src="/svg/logo.svg"*/}
-      {/*  alt="Logo"*/}
-      {/*  height={height}*/}
-      {/*  width={width}*/}
-      {/*/>*/}
+      {logo}
     </a>
   );
 }

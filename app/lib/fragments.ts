@@ -162,7 +162,7 @@ export const CART_QUERY_FRAGMENT = `#graphql
   }
 ` as const;
 
-/* bring to home fragments and queries files */
+/* bring to custom fragments and queries files */
 
 // const MENU_FRAGMENT = `#graphql
 //   fragment MenuItem on MenuItem {
