@@ -2,7 +2,7 @@ export const APP_STRINGS = {
   "vi-vn": {
     // General
     storeName: "Socutie",
-    viewAllText: "Xem tất cả",
+    viewAllText: "Xem Tất Cả",
     exploreNowText: "Khám phá ngay",
 
     // Cart
@@ -25,6 +25,7 @@ export const APP_STRINGS = {
     aboutUsTitle: "ABOUT SOCUTIE",
     aboutUsText1: "Socutie là một brand xinh xắn ra đời năm 2023, mang theo mong muốn tạo ra những sản phẩm chất lượng, dễ ứng dụng trong cuộc sống, và vẫn cực kỳ thân thiện với ví tiền của bae nữa nè.",
     aboutUsText2: "Mỗi món đồ nhà Socutie đều được thiết kế tỉ mỉ, bởi các cô/chú thợ may nhiều năm kinh nghiệm. Với mong muốn bae nhận hàng cảm giác như được tặng một món quà từ người thân yêu!",
+    handbookTitle: "Cùng tìm hiểu về Socutie với tụi mình nha",
 
     // Footer
     becomeMemberTitle: "BECOME OUR CUTIE MEMBER",
@@ -85,7 +86,7 @@ export const APP_STRINGS = {
   "en-us": {
     // General
     storeName: "Socutie",
-    viewAllText: "Discover all",
+    viewAllText: "Discover All",
     exploreNowText: "Explore now",
 
 
@@ -109,7 +110,7 @@ export const APP_STRINGS = {
     aboutUsTitle: "ABOUT SOCUTIE",
     aboutUsText1: "Socutie is a sweet little brand born in 2023, with the dream of creating high-quality products that are easy to use in everyday life, and still super friendly to bae’s wallet.",
     aboutUsText2: "Every Socutie piece is carefully crafted by experienced tailors, with the hope that when bae receives it, it feels just like getting a gift from a loved one!",
-
+    handbookTitle: "Let's explore Socutie together with us",
 
     // Footer
     becomeMemberTitle: "BECOME OUR CUTIE MEMBER",

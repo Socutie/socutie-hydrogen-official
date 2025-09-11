@@ -2,15 +2,26 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import {Image} from '@shopify/hydrogen';
+import {useLocation} from 'react-router';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
 
 export default function AboutSocutiePage() {
-  const srcList = [
+  const location = useLocation();
+
+  const srcList = getAvailableLocaleFromPathname(location.pathname) === "vi-vn" ? [
     "/images/1.jpg",
     "/images/2.jpg",
     "/images/3.jpg",
     "/images/4.jpg",
     "/images/5.jpg",
     "/images/6.jpg",
+  ] : [
+    "/images/1eng.jpg",
+    "/images/2eng.jpg",
+    "/images/3eng.jpg",
+    "/images/4eng.jpg",
+    "/images/5eng.jpg",
+    "/images/6eng.jpg",
   ];
   
   return (

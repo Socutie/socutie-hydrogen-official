@@ -3,17 +3,26 @@ import HTMLFlipBook from 'react-pageflip';
 import {Logo} from '~/components/layout/Header';
 import {useLocation} from 'react-router';
 import {ArrowRight, HandMetal} from 'lucide-react';
+import {getAvailableLocaleFromPathname} from '~/common/utils/i18nUtils';
+import {APP_STRINGS} from '~/common/constants/appStrings';
 
 export function HomeBook() {
   const location = useLocation();
 
-  const srcList = [
+  const srcList = getAvailableLocaleFromPathname(location.pathname) === "vi-vn" ? [
     "/images/1.jpg",
     "/images/2.jpg",
     "/images/3.jpg",
     "/images/4.jpg",
     "/images/5.jpg",
     "/images/6.jpg",
+  ] : [
+    "/images/1eng.jpg",
+    "/images/2eng.jpg",
+    "/images/3eng.jpg",
+    "/images/4eng.jpg",
+    "/images/5eng.jpg",
+    "/images/6eng.jpg",
   ];
 
   return (
@@ -24,7 +33,7 @@ export function HomeBook() {
         size="stretch"
         drawShadow={true}
         maxShadowOpacity={0.4}
-        flippingTime={1000}
+        flippingTime={900}
         showCover={true}
         usePortrait={true}
         autoSize={true}
@@ -39,7 +48,7 @@ export function HomeBook() {
               <Logo width={60} height={60} pathname={location.pathname} disableNavigate={true}/>
             </div>
             <div className={"font-fancy text-3xl sm:text-4xl"}>Socutie Handbook</div>
-            <div className={"text-sm text-center"}>Cùng tìm hiểu về Socutie với tụi mình nha</div>
+            <div className={"text-sm text-center"}>{APP_STRINGS[getAvailableLocaleFromPathname(location.pathname)].handbookTitle}</div>
             <div className={"mt-6 animate-bounce"}>
               <HandMetal strokeWidth={1.5} size={20}/>
             </div>

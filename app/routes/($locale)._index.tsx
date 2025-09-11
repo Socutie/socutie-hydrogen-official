@@ -217,13 +217,19 @@ export default function Homepage() {
               transition={{duration: 0.75, ease: 'easeOut'}}
               viewport={{once: true, amount: 0.3}}
             >
-              <Image
-                src={'/images/collection-banner.jpg'}
-                alt={'collection-image'}
-                className={`w-full aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
-                loading={'eager'}
-                sizes="(min-width: 1024px) 25vw, 50vw"
-              />
+              <div className={"relative border-[10px] lg:border-[12px] border-light-bg1 rounded-md"}>
+                <Image
+                  src={'/images/collection-banner.jpg'}
+                  alt={'collection-image'}
+                  className={`w-full aspect-[21-9] lg:aspect-[3/4] object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-0 opacity-100`}
+                  loading={'eager'}
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                />
+                <div className={"absolute -top-10 -right-10 rotate-6 w-[100px] md:w-[120px]"}>
+                  <img alt={"flower"} src={"/images/flower.png"} />
+                </div>
+              </div>
+
             </motion.div>
             <FadeInDiv viewportAmount={0.4}>
               <div
@@ -276,7 +282,7 @@ export default function Homepage() {
                       <div className={''}>
                         {APP_STRINGS[
                           getAvailableLocaleFromPathname(location.pathname)
-                        ].exploreNowText.toUpperCase()}
+                        ].viewAllText.toUpperCase()}
                       </div>
                     </div>
                   </Link>
