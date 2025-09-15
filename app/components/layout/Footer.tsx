@@ -114,6 +114,17 @@ export function Footer({
                           }
                         </div>
                       </Link>
+                      <Link
+                        to={`${getAvailableLocaleUrlPartFromPathname(location.pathname)}/pages/chinh-sach-thanh-toan`}
+                      >
+                        <div className={'text-sm'}>
+                          {
+                            APP_STRINGS[
+                              getAvailableLocaleFromPathname(location.pathname)
+                              ].footerInfoPaymentText
+                          }
+                        </div>
+                      </Link>
                     </div>
                   </FadeInItem>
 
